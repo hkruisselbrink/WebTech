@@ -19,6 +19,7 @@ public class Model {
 		movies.add(new Movie("0373883", 109, "Halloween", "Rob Zombie", "Enge film enzoo", "31 Aug 2007"));
 		movies.add(new Movie("0076759", 121, "Star Wars Episode 4 - A New Hope", "George Lucas", "Coole film enzoo", "25 May 1977"));
 				
+		users.add(new User("Janus", "de", "Henk", "Henkiedejanus9919912", "ikheetjanusvandeachternaam"));
 	}
 	
 	public List<Movie> getAllMovies()
@@ -44,11 +45,11 @@ public class Model {
 	}
 	
 	
-	public User getUser(String nickname)
+	public User getUser(String id)
 	{
 		for(User u : users)
 		{
-			if(u.getNickname().equals(nickname))
+			if(u.getId().equals(id))
 			{
 				return u;
 			}
