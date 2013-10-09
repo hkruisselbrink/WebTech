@@ -15,6 +15,7 @@ public class Movie {
 		this.director = director;
 		this.description = description;
 		this.date = date;
+		lastId++;
 	}
 
 	public int getId() {
