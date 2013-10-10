@@ -18,7 +18,7 @@ public class UserJersey {
 	
 	@Path("{id}")
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({"application/json", "application/xml"})
 	public User getUser(@PathParam("id") String id)
 	{
 		Model model = (Model) context.getAttribute("model");

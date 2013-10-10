@@ -3,16 +3,15 @@ package model;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @XmlRootElement
 public class User {
 	
 	private String lastName, tussenvoegsel, firstName, nickname, password, id;
 	private static int lastId = 1000;
 
-	public User()
-	{
-	
-	}
+	public User() {	}
 	
 	public User(String lastName,String tussenvoegsel,String firstName,String nickname,String password)
 	{
@@ -26,6 +25,7 @@ public class User {
 	}
 
 	@XmlTransient
+	@JsonIgnore
 	public String getId() {
 		return id;
 	}
@@ -47,6 +47,7 @@ public class User {
 	}
 
 	@XmlTransient
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}

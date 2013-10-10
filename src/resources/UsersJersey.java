@@ -18,7 +18,7 @@ public class UsersJersey {
 	@Context ServletContext context;
 	
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({"application/json", "application/xml"})
 	public ArrayList<User> getUsers()
 	{
 		Model model = (Model) context.getAttribute("model");

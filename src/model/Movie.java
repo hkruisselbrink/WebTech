@@ -3,6 +3,8 @@ package model;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @XmlRootElement
 public class Movie {
 	
@@ -27,6 +29,7 @@ public class Movie {
 	}
 
 	@XmlTransient
+	@JsonIgnore
 	public int getId() {
 		return id;
 	}
