@@ -20,6 +20,8 @@ public class Model {
 		movies.add(new Movie("0076759", 121, "Star Wars Episode 4 - A New Hope", "George Lucas", "Coole film enzoo", "25 May 1977"));
 				
 		users.add(new User("Janus", "de", "Henk", "Henkiedejanus9919912", "ikheetjanusvandeachternaam"));
+		users.add(new User("Piet", "van", "Diederiksen", "Diederikje1", "ikhouvanpuppies"));
+
 	}
 	
 	public List<Movie> getAllMovies()

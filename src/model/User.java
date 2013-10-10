@@ -1,10 +1,18 @@
 package model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class User {
 	
 	private String lastName, tussenvoegsel, firstName, nickname, password, id;
 	private static int lastId = 1000;
+
+	public User()
+	{
 	
+	}
 	
 	public User(String lastName,String tussenvoegsel,String firstName,String nickname,String password)
 	{
@@ -22,21 +30,22 @@ public class User {
 		return id;
 	}
 
+	@XmlElement
 	public String getLastName() {
 		return lastName;
 	}
 
-
+	@XmlElement
 	public String getTussenvoegsel() {
 		return tussenvoegsel;
 	}
 
-
+	@XmlElement
 	public String getFirstName() {
 		return firstName;
 	}
 
-
+	@XmlElement
 	public String getNickname() {
 		return nickname;
 	}

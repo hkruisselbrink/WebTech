@@ -1,7 +1,5 @@
 package resources;
 
-import java.util.ArrayList;
-
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,17 +11,20 @@ import javax.ws.rs.core.MediaType;
 import model.Model;
 import model.User;
 
-@Path("/users")
-public class UsersJersey {
+@Path("/user")
+public class UserJersey {
 	
 	@Context ServletContext context;
 	
+	@Path("{id}")
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	public ArrayList<User> getUsers()
+	public User getUser(@PathParam("id") String id)
 	{
 		Model model = (Model) context.getAttribute("model");
-		return (ArrayList<User>) model.getAllUsers();
-	}	
+		return model.getUser(id);
+	}
+	
+	
 
 }
