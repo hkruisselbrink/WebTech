@@ -10,19 +10,18 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import model.Model;
-import model.User;
+import model.Movie;
 
-@Path("/users")
-public class UsersJersey {
-	
+@Path("/movies")
+public class MoviesJersey {
+
 	@Context ServletContext context;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	public ArrayList<User> getUsers()
-	{
+	public ArrayList<Movie> getMovies() {
 		Model model = (Model) context.getAttribute("model");
-		return (ArrayList<User>) model.getAllUsers();
-	}	
-
+		return (ArrayList<Movie>) model.getAllMovies();
+	}
+	
 }

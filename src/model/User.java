@@ -1,7 +1,7 @@
 package model;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class User {
@@ -25,32 +25,28 @@ public class User {
 		lastId++;
 	}
 
-
+	@XmlTransient
 	public String getId() {
 		return id;
 	}
 
-	@XmlElement
 	public String getLastName() {
 		return lastName;
 	}
 
-	@XmlElement
 	public String getTussenvoegsel() {
 		return tussenvoegsel;
 	}
-
-	@XmlElement
+	
 	public String getFirstName() {
 		return firstName;
 	}
 
-	@XmlElement
 	public String getNickname() {
 		return nickname;
 	}
 
-
+	@XmlTransient
 	public String getPassword() {
 		return password;
 	}
@@ -59,6 +55,13 @@ public class User {
 	{
 		return nickname + password + firstName + tussenvoegsel + lastName;
 	}
-	
 
+	public void setLastName(String lastName) { }
+	public void setTussenvoegsel(String tussenvoegsel) { }
+	public void setFirstName(String firstName) { }
+	public void setNickname(String nickname) { }
+	public void setPassword(String password) { }
+	public void setId(String id) { }
+	
+	
 }

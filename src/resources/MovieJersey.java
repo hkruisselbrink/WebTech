@@ -1,28 +1,26 @@
 package resources;
 
-import java.util.ArrayList;
-
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import model.Model;
-import model.User;
+import model.Movie;
 
-@Path("/users")
-public class UsersJersey {
+@Path("/movie")
+public class MovieJersey {
 	
 	@Context ServletContext context;
 	
 	@GET
+	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public ArrayList<User> getUsers()
-	{
+	public Movie getMovie(@PathParam("id") int id) {
 		Model model = (Model) context.getAttribute("model");
-		return (ArrayList<User>) model.getAllUsers();
-	}	
-
+		return model.getMovie(id);
+	}
 }
