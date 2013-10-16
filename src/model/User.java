@@ -3,6 +3,8 @@ package model;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @XmlRootElement
 public class User {
 	
@@ -11,7 +13,8 @@ public class User {
 
 	public User()
 	{
-	
+		id = "u" + (lastId + 1);
+		lastId++;
 	}
 	
 	public User(String lastName,String tussenvoegsel,String firstName,String nickname,String password)
@@ -25,7 +28,8 @@ public class User {
 		lastId++;
 	}
 
-	@XmlTransient
+//	@XmlTransient
+//	@JsonIgnore
 	public String getId() {
 		return id;
 	}
@@ -46,7 +50,8 @@ public class User {
 		return nickname;
 	}
 
-	@XmlTransient
+//	@XmlTransient
+//	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -56,12 +61,19 @@ public class User {
 		return nickname + password + firstName + tussenvoegsel + lastName;
 	}
 
-	public void setLastName(String lastName) { }
-	public void setTussenvoegsel(String tussenvoegsel) { }
-	public void setFirstName(String firstName) { }
-	public void setNickname(String nickname) { }
-	public void setPassword(String password) { }
-	public void setId(String id) { }
+	
+	@SuppressWarnings("unused")
+	private void setLastName(String lastName) {this.lastName = lastName; }
+	@SuppressWarnings("unused")
+	private void setTussenvoegsel(String tussenvoegsel) {this.tussenvoegsel = tussenvoegsel; }
+	@SuppressWarnings("unused")
+	private void setFirstName(String firstName) {this.firstName = firstName; }
+	@SuppressWarnings("unused")
+	private void setNickname(String nickname) {this.nickname = nickname; }
+	@SuppressWarnings("unused")
+	private void setPassword(String password) {this.password = password; }
+	
+	
 	
 	
 }
