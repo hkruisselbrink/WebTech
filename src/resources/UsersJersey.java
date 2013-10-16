@@ -19,6 +19,7 @@ public class UsersJersey {
 	
 	@GET
 	@Produces({"application/json", "application/xml"})
+
 	public ArrayList<User> getUsers()
 	{
 		Model model = (Model) context.getAttribute("model");
