@@ -12,15 +12,17 @@ import model.Model;
 import model.Movie;
 
 @Path("/movie")
+@Produces({"application/json", "application/xml"})
 public class MovieJersey {
 	
 	@Context ServletContext context;
 	
 	@GET
 	@Path("{id}")
-	@Produces({"application/json", "application/xml"})
 	public Movie getMovie(@PathParam("id") int id) {
 		Model model = (Model) context.getAttribute("model");
 		return model.getMovie(id);
 	}
+	
+	
 }
