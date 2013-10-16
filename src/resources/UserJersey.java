@@ -1,5 +1,7 @@
 package resources;
 
+import java.io.IOException;
+
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -33,9 +35,13 @@ public class UserJersey {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createUser(User user)
 	{
-		System.out.println(user.getFirstName());
-		
-		
+		Model model = (Model) context.getAttribute("model");
+		try {
+			model.addUser(user);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

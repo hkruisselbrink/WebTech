@@ -23,6 +23,7 @@ public class UsersJersey {
 	public ArrayList<User> getUsers()
 	{
 		Model model = (Model) context.getAttribute("model");
+		System.out.println((ArrayList<User>) model.getAllUsers());
 		return (ArrayList<User>) model.getAllUsers();
 	}	
 

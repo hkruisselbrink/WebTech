@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,21 @@ public class Model {
 		}
 		
 		return null;
+	}
+	
+	public void addUser(User user) throws IOException
+	{
+		for(User u : users)
+		{
+			if(u.getNickname().equals(user.getNickname()))
+			{
+				throw new IOException("user already exists");
+			}
+		}
+		
+		//check of het niet leeg is
+		
+		users.add(user);
 	}
 
 

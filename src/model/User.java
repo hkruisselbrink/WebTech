@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @XmlRootElement
 public class User {
@@ -70,7 +71,7 @@ public class User {
 	private void setFirstName(String firstName) {this.firstName = firstName; }
 	@SuppressWarnings("unused")
 	private void setNickname(String nickname) {this.nickname = nickname; }
-	@SuppressWarnings("unused")
+	@JsonProperty
 	private void setPassword(String password) {this.password = password; }
 	
 	
