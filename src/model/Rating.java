@@ -29,9 +29,9 @@ public class Rating {
 		return rating;
 	}
 
-	public void setUser(User user) { }
-	public void setRating(int rating) { }
-	public void setMovie(Movie movie) { }
+	public void setUser(User user) {this.user = user;}
+	public void setRating(int rating) {this.rating = rating;}
+	public void setMovie(Movie movie) {this.movie = movie;}
 	
 
 }
