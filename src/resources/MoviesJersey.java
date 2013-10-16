@@ -18,11 +18,7 @@ public class MoviesJersey {
 	@Context ServletContext context;
 	
 	@GET
-<<<<<<< HEAD
-	@Produces(MediaType.APPLICATION_JSON)
-=======
 	@Produces({"application/json", "application/xml"})
->>>>>>> ce8694ca3862ef1ae80dab523fbdf7692b3c3ac3
 	public ArrayList<Movie> getMovies() {
 		Model model = (Model) context.getAttribute("model");
 		return (ArrayList<Movie>) model.getAllMovies();

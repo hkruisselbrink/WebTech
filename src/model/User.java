@@ -11,15 +11,11 @@ public class User {
 	private String lastName, tussenvoegsel, firstName, nickname, password, id;
 	private static int lastId = 1000;
 
-<<<<<<< HEAD
 	public User()
 	{
 		id = "u" + (lastId + 1);
 		lastId++;
 	}
-=======
-	public User() {	}
->>>>>>> ce8694ca3862ef1ae80dab523fbdf7692b3c3ac3
 	
 	public User(String lastName,String tussenvoegsel,String firstName,String nickname,String password)
 	{
@@ -32,13 +28,8 @@ public class User {
 		lastId++;
 	}
 
-<<<<<<< HEAD
-//	@XmlTransient
-//	@JsonIgnore
-=======
 	@XmlTransient
 	@JsonIgnore
->>>>>>> ce8694ca3862ef1ae80dab523fbdf7692b3c3ac3
 	public String getId() {
 		return id;
 	}
@@ -59,13 +50,8 @@ public class User {
 		return nickname;
 	}
 
-<<<<<<< HEAD
-//	@XmlTransient
-//	@JsonIgnore
-=======
 	@XmlTransient
 	@JsonIgnore
->>>>>>> ce8694ca3862ef1ae80dab523fbdf7692b3c3ac3
 	public String getPassword() {
 		return password;
 	}
