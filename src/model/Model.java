@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Model {
@@ -9,6 +10,7 @@ public class Model {
 	private ArrayList<Movie> movies;
 	private ArrayList<Rating> ratings;
 	private ArrayList<User> users;
+	private HashMap<User, String> clients;
 	
 	public Model()
 	{
@@ -23,6 +25,27 @@ public class Model {
 		users.add(new User("Janus", "de", "Henk", "Henkiedejanus9919912", "ikheetjanusvandeachternaam"));
 		users.add(new User("Piet", "van", "Diederiksen", "Diederikje1", "ikhouvanpuppies"));
 
+		clients = new HashMap<User, String>();
+	}
+	
+	public String addClient(User user) {
+		if(clients.containsKey(user)) {
+			return clients.get(user);
+		} else {
+			String token = createToken();
+			clients.put(user, token);
+			return token;
+		}
+	}
+	
+	public String createToken() {
+		int i = 0;
+		i = (int) (Math.random()*1000000000);
+		String token = Integer.toString(i);
+		if (clients.containsValue(token)) {
+			return createToken();
+		}
+		return token;
 	}
 	
 	public List<Movie> getAllMovies()

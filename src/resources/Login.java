@@ -22,15 +22,18 @@ public class Login {
 
 	@POST
 	public void loginUser(User user) {
-		System.out.println(user.toString());
 		Model model = (Model) context.getAttribute("model");
 		List<User> userList = model.getAllUsers();
-		System.out.println(userList.toString());
+		User temp = null;
 		for(User u : userList) {
-			System.out.println(u.toString());
 			if(user.getPassword().equals(u.getPassword()) && user.getNickname().equals(u.getNickname())) {
-				//TODO INGELOGD
+				temp = u;
 			}
+		}
+		if(temp == null) {
+			System.out.println("NIET INGELOGD");
+		} else if (temp != null) {
+			System.out.println(model.addClient(temp));
 		}
 	}
 }
