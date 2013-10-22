@@ -25,13 +25,8 @@ public class MovieJersey {
 	
 	@GET
 	@Path("{id}")
-	public Movie getMovie(@PathParam("id") int id, @HeaderParam("access_token") String accessToken) {
+	public Movie getMovie(@PathParam("id") String id, @HeaderParam("access_token") String accessToken) {
 		Model model = (Model) context.getAttribute("model");
-//		if(model.checkAccessToken(accessToken) == null)
-//		{
-//			throw new WebApplicationException(Response.status(Response.Status.FORBIDDEN).type(MediaType.TEXT_PLAIN).entity("Access_token not valid").build());
-//
-//		}
 		Movie temp = model.getMovie(id);
 		if(temp == null)
 		{
@@ -39,13 +34,14 @@ public class MovieJersey {
 		}
 		else
 		{
+			temp.setAvgRating(model.getAvgRatingMovie(temp));
 			return temp;
 		}
 	}
 	
 	@POST
 	@Path("{id}/rate")
-	public void rateMovie(@PathParam("id") int id, @HeaderParam("rating") double rating, @HeaderParam("access_token") String accessToken)
+	public void rateMovie(@PathParam("id") String id, @HeaderParam("rating") double rating, @HeaderParam("access_token") String accessToken)
 	{
 		Model model = (Model) context.getAttribute("model");
 		Movie movie = model.getMovie(id);

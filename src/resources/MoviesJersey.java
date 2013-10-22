@@ -1,6 +1,7 @@
 package resources;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
@@ -21,7 +22,12 @@ public class MoviesJersey {
 	@Produces({"application/json", "application/xml"})
 	public ArrayList<Movie> getMovies() {
 		Model model = (Model) context.getAttribute("model");
-		return (ArrayList<Movie>) model.getAllMovies();
+		ArrayList<Movie> temp = (ArrayList<Movie>) model.getAllMovies();
+		for(Movie m : temp)
+		{
+			m.setAvgRating(model.getAvgRatingMovie(m));
+		}
+		return temp;
 	}
 	
 	@GET

@@ -17,15 +17,13 @@ public class Movie {
 	private String title, director, description, ttNumber;
 	private GregorianCalendar date;
 	private double avgRating = 0;
-	private Model model;
 	
 	public Movie() {
 		
 	}
 	
-	public Movie(Model model, String ttNumber, int length, String title, String director, String description, GregorianCalendar date)
+	public Movie(String ttNumber, int length, String title, String director, String description, GregorianCalendar date)
 	{
-		this.model = model;
 		this.id = lastId;
 		this.ttNumber = ttNumber;
 		this.length = length;
@@ -63,14 +61,17 @@ public class Movie {
 	}	
 
 	public double getAvgRating() {
-		double total = 0;
-		
-		for(Rating r : model)
+		return avgRating;
 	}
 
 	public String getDate() {
 		SimpleDateFormat jsonDateFormat =  new SimpleDateFormat("MMM d yyyy", Locale.ENGLISH);
 		return jsonDateFormat.format(date.getTime());
+	}
+	
+	public void setAvgRating(double avgRating) 
+	{
+		this.avgRating = avgRating;
 	}
 	
 	public void setLength(int length) { }
@@ -79,5 +80,4 @@ public class Movie {
 	public void setDescription(String description) { }
 	public void setDate(String date) { }
 	public void setTtNumber(String ttNumber) { }	
-	public void setAvgRating(double avgRating) { }
 }
