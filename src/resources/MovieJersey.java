@@ -1,6 +1,7 @@
 package resources;
 
 import javax.servlet.ServletContext;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -26,6 +27,7 @@ public class MovieJersey {
 	@GET
 	@Path("{id}")
 	public Movie getMovie(@PathParam("id") String id, @HeaderParam("access_token") String accessToken) {
+		System.out.println(id+ " " + accessToken);
 		Model model = (Model) context.getAttribute("model");
 		Movie temp = model.getMovie(id);
 		if(temp == null)
@@ -43,13 +45,15 @@ public class MovieJersey {
 	@Path("{id}/rate")
 	public void rateMovie(@PathParam("id") String id, @HeaderParam("rating") double rating, @HeaderParam("access_token") String accessToken)
 	{
+		if(rating % 0.5 != 0) {
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Invalid Rating").build());
+		}
 		Model model = (Model) context.getAttribute("model");
 		Movie movie = model.getMovie(id);
 		
 		if(movie == null)
 		{
 			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Movie not found").build());
-
 		}
 		
 		User user = model.checkAccessToken(accessToken);
@@ -63,16 +67,41 @@ public class MovieJersey {
 		
 		if(r == null)
 		{
+			System.out.println("fredje");
 			model.addRating(movie, user, rating);
 		}
 		else
 		{
-			model.changeRating(r, rating);
+			model.changeRating(r, rating, movie);
 		}		
 		
 	}
 	
-	
-	
-	
+	@DELETE
+	@Path("{id}/rate")
+	public void deleteRating(@PathParam("id") String id, @HeaderParam("access_token") String accessToken) 
+	{
+		Model model = (Model) context.getAttribute("model");
+		Movie movie = model.getMovie(id);
+		
+		if(movie == null)
+		{
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Movie not found").build());
+		}
+		
+		User user = model.checkAccessToken(accessToken);
+		if(user == null)
+		{
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("User not found").build());
+
+		}
+		
+		Rating r = model.getRating(movie, user);
+		if(r == null)
+		{
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Rating not found").build());
+		}
+		
+		model.removeRating(r, movie);
+	}
 }

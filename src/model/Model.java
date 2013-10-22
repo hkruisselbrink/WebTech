@@ -57,19 +57,28 @@ public class Model {
 		}
 	}
 	
-	public void addRating(Movie movie, User user, double rating)
-	{
-		
-		// checken of rating wel 0,5 is
-		Rating ratingObj = new Rating(user, movie, rating);
-		ratings.add(ratingObj);
-		
+	public ArrayList<Rating> getRatings() {
+		return ratings;
 	}
 	
-	public void changeRating(Rating rating, double ratingNumber)
+	public void addRating(Movie movie, User user, double rating)
 	{
-		// checken of rating wel 0,5 is
+		Rating ratingObj = new Rating(user, movie, rating);
+		ratings.add(ratingObj);
+		movie.setAvgRating(getAvgRatingMovie(movie));
+		System.out.println(ratings.toString());
+	}
+	
+	public void changeRating(Rating rating, double ratingNumber, Movie movie)
+	{
 		rating.setRating(ratingNumber);
+		movie.setAvgRating(getAvgRatingMovie(movie));
+		System.out.println(ratings.toString());
+	}
+	
+	public void removeRating(Rating rating, Movie movie) {
+		ratings.remove(rating);
+		movie.setAvgRating(getAvgRatingMovie(movie));
 	}
 	
 	public Rating getRating(Movie movie, User user)
@@ -83,6 +92,16 @@ public class Model {
 			}
 		}
 		return null;
+	}
+	
+	public void deleteRating(Movie movie, User user)
+	{
+		for(Rating r: ratings) {
+			if(r.getMovie() == movie && r.getUser() == user) {
+				ratings.remove(r);
+			}
+		}
+		
 	}
 	
 	public String createToken() {

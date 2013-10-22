@@ -71,6 +71,7 @@ public class Movie {
 	
 	public void setAvgRating(double avgRating) 
 	{
+		System.out.println("setAvgRating" + avgRating);
 		this.avgRating = avgRating;
 	}
 	
