@@ -1,5 +1,9 @@
 package model;
 
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -10,14 +14,18 @@ public class Movie {
 	
 	private static int lastId = 1000;
 	private int id, length;
-	private String title, director, description, date, ttNumber;
+	private String title, director, description, ttNumber;
+	private GregorianCalendar date;
+	private double avgRating = 0;
+	private Model model;
 	
 	public Movie() {
 		
 	}
 	
-	public Movie(String ttNumber, int length, String title, String director, String description, String date)
+	public Movie(Model model, String ttNumber, int length, String title, String director, String description, GregorianCalendar date)
 	{
+		this.model = model;
 		this.id = lastId;
 		this.ttNumber = ttNumber;
 		this.length = length;
@@ -52,10 +60,17 @@ public class Movie {
 
 	public String getDescription() {
 		return description;
+	}	
+
+	public double getAvgRating() {
+		double total = 0;
+		
+		for(Rating r : model)
 	}
 
 	public String getDate() {
-		return date;
+		SimpleDateFormat jsonDateFormat =  new SimpleDateFormat("MMM d yyyy", Locale.ENGLISH);
+		return jsonDateFormat.format(date.getTime());
 	}
 	
 	public void setLength(int length) { }
@@ -64,4 +79,5 @@ public class Movie {
 	public void setDescription(String description) { }
 	public void setDate(String date) { }
 	public void setTtNumber(String ttNumber) { }	
+	public void setAvgRating(double avgRating) { }
 }

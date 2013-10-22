@@ -9,8 +9,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import model.Model;
 import model.User;
@@ -27,8 +29,16 @@ public class UserJersey {
 	public User getUser(@PathParam("id") String id)
 	{
 		Model model = (Model) context.getAttribute("model");
-		
-		return model.getUser(id);
+		User temp = model.getUser(id);
+		if(temp == null)
+		{
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("User not found").build());
+
+		}
+		else
+		{
+			return temp;
+		}
 	}
 	
 	@POST
@@ -39,9 +49,10 @@ public class UserJersey {
 		try {
 			model.addUser(user);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new WebApplicationException(Response.status(Response.Status.CONFLICT).type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build());
 		}
+		
+		throw new WebApplicationException(Response.status(Response.Status.CREATED).type(MediaType.TEXT_PLAIN).entity("User created!").build());
 		
 	}
 	

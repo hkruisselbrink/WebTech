@@ -61,6 +61,15 @@ public class User {
 	{
 		return nickname + password + firstName + tussenvoegsel + lastName;
 	}
+	
+	public boolean userComplete()
+	{
+		if(nickname != null && !nickname.equals("") && password != null && !password.equals("") && firstName != null && !firstName.equals("") && lastName != null && !lastName.equals(""))
+		{
+			return true;
+		}
+		return false;
+	}
 
 	
 	@SuppressWarnings("unused")

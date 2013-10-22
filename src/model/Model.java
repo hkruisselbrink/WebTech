@@ -2,8 +2,11 @@ package model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+
+import com.google.common.collect.Multiset.Entry;
 
 public class Model {
 	
@@ -18,14 +21,30 @@ public class Model {
 		ratings = new ArrayList<Rating>();
 		users = new ArrayList<User>();
 		
-		movies.add(new Movie("0120889", 113, "What dreams may come", "Vincent Ward", "Mooie film enzo", "2 Oct 1998"));
-		movies.add(new Movie("0373883", 109, "Halloween", "Rob Zombie", "Enge film enzoo", "31 Aug 2007"));
-		movies.add(new Movie("0076759", 121, "Star Wars Episode 4 - A New Hope", "George Lucas", "Coole film enzoo", "25 May 1977"));
+		movies.add(new Movie(this, "0120889", 113, "What dreams may come", "Vincent Ward", "Mooie film enzo", new GregorianCalendar(1998, 9, 2)));
+		movies.add(new Movie(this, "0373883", 109, "Halloween", "Rob Zombie", "Enge film enzoo",new GregorianCalendar(2007, 7, 31)));
+		movies.add(new Movie(this, "0076759", 121, "Star Wars Episode 4 - A New Hope", "George Lucas", "Coole film enzoo", new GregorianCalendar(1977, 4, 25)));
 				
 		users.add(new User("Janus", "de", "Henk", "Henkiedejanus9919912", "ikheetjanusvandeachternaam"));
 		users.add(new User("Piet", "van", "Diederiksen", "Diederikje1", "ikhouvanpuppies"));
 
 		clients = new HashMap<User, String>();
+	}
+	
+	public User checkAccessToken(String accessToken)
+	{
+		if(clients.containsValue(accessToken))
+		{
+			for(java.util.Map.Entry<User, String> entry : clients.entrySet())
+			{
+				if(accessToken.equals(entry.getValue()))
+				{
+					return entry.getKey();
+				}
+			}
+		}
+		
+		return null;
 	}
 	
 	public String addClient(User user) {
@@ -36,6 +55,34 @@ public class Model {
 			clients.put(user, token);
 			return token;
 		}
+	}
+	
+	public void addRating(Movie movie, User user, double rating)
+	{
+		
+		// checken of rating wel 0,5 is
+		Rating ratingObj = new Rating(user, movie, rating);
+		ratings.add(ratingObj);
+		
+	}
+	
+	public void changeRating(Rating rating, double ratingNumber)
+	{
+		// checken of rating wel 0,5 is
+		rating.setRating(ratingNumber);
+	}
+	
+	public Rating getRating(Movie movie, User user)
+	{
+		List<Rating> tempRatings = getAllRatingsMovie(movie);
+		for(Rating r : tempRatings)
+		{
+			if(r.getUser().equals(user))
+			{
+				return r;
+			}
+		}
+		return null;
 	}
 	
 	public String createToken() {
@@ -65,6 +112,31 @@ public class Model {
 		return null;
 	}
 	
+	public double getAvgRatingMovie(Movie movie)
+	{
+		List<Rating> temp = getAllRatingsMovie(movie);
+		double total = 0;
+		for(Rating r : temp)
+		{
+			total += r.getRating();
+		}
+		return total/temp.size();
+	}
+	
+	public List<Rating> getAllRatingsMovie(Movie movie)
+	{
+		List<Rating> temp = new ArrayList<Rating>();
+		for(Rating r : ratings)
+		{
+			if(r.getMovie().equals(movie))
+			{
+				temp.add(r);
+			}
+		}
+		
+		return temp;
+	}
+	
 	public List<User> getAllUsers()
 	{
 		return users;
@@ -86,6 +158,11 @@ public class Model {
 	
 	public void addUser(User user) throws IOException
 	{
+		if(!user.userComplete())
+		{
+			throw new IOException("User not complete");
+		}
+		
 		for(User u : users)
 		{
 			if(u.getNickname().equals(user.getNickname()))

@@ -8,9 +8,9 @@ public class Rating {
 	
 	private User user;
 	private Movie movie;
-	private int rating;
+	private double rating;
 	
-	public Rating(User user, Movie movie, int rating)
+	public Rating(User user, Movie movie, double rating)
 	{
 		this.user = user;
 		this.movie = movie;
@@ -25,12 +25,12 @@ public class Rating {
 		return movie;
 	}
 
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
 
 	public void setUser(User user) {this.user = user;}
-	public void setRating(int rating) {this.rating = rating;}
+	public void setRating(double rating) {this.rating = rating;}
 	public void setMovie(Movie movie) {this.movie = movie;}
 	
 

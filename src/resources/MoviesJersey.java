@@ -24,4 +24,22 @@ public class MoviesJersey {
 		return (ArrayList<Movie>) model.getAllMovies();
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("avgRatings")
+	public ArrayList<Movie> getMoviesWithRating()
+	{
+		Model model = (Model) context.getAttribute("model");
+		ArrayList<Movie> temp = new ArrayList<Movie>();
+		for(Movie m : model.getAllMovies())
+		{
+			if(model.getAllRatingsMovie(m).size() != 0)
+			{
+				temp.add(m);
+			}
+		}
+		return temp;		
+	}
+	
+	
 }
