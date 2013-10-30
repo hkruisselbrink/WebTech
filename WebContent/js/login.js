@@ -14,7 +14,7 @@ var getUser = function(accessToken)
 		url: "resources/user/me",
 		beforeSend: function (request)
         {
-            request.setRequestHeader("access_token", 1);
+            request.setRequestHeader("access_token", accessToken);
         },
 		dataType: "json",
 	}).fail(function(jqXHR, textStatus){
@@ -64,7 +64,7 @@ $(document).ready(function(){
 	
 });
 
-$('#login-form').submit(function(){
+$('#submit-login').click(function(){
 	var username = $('#username-box').val();
 	var password = $('#password-box').val();
 	

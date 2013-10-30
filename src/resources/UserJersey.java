@@ -67,14 +67,18 @@ public class UserJersey {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createUser(User user)
 	{
+		System.out.println(user.getFirstName());
+		System.out.println(user.getLastName());
+		System.out.println(user.getNickname());
+		System.out.println(user.getPassword());
 		Model model = (Model) context.getAttribute("model");
 		try {
 			model.addUser(user);
 		} catch (IOException e) {
 			throw new WebApplicationException(Response.status(Response.Status.CONFLICT).type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build());
 		}
-		
-		throw new WebApplicationException(Response.status(Response.Status.CREATED).type(MediaType.TEXT_PLAIN).entity("User created!").build());
+		System.out.println("USER GEMAAKT");
+		//throw new WebApplicationException(Response.status(Response.Status.CREATED).type(MediaType.TEXT_PLAIN).entity("User created!").build());
 		
 	}
 	

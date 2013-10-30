@@ -27,7 +27,7 @@ public class Model {
 		movies.add(new Movie("tt0076759", 121, "Star Wars Episode 4 - A New Hope", "George Lucas", "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a wookiee and two droids to save the universe from the Empire's world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader.", new GregorianCalendar(1977, 4, 25)));
 				
 		users.add(new User("Janus", "de", "Henk", "Henkiedejanus9919912", "ikheetjanusvandeachternaam"));
-		users.add(new User("Piet", "van", "Diederiksen", "Diederikje1", "ikhouvanpuppies"));
+		users.add(new User("Piet", "van", "Diederiksen", "test", "test"));
 		User temp = new User("Pjotr", "de", "Bruin", "pjoow", "oke");
 		users.add(temp);
 
