@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @XmlRootElement
-public class Movie {
+public class Movie implements Comparable<Movie>{
 	
 	private static int lastId = 1000;
 	private int id, length;
@@ -80,5 +80,22 @@ public class Movie {
 	public void setDirector(String director) { }
 	public void setDescription(String description) { }
 	public void setDate(String date) { }
-	public void setTtNumber(String ttNumber) { }	
+	public void setTtNumber(String ttNumber) { }
+
+	@Override
+	public int compareTo(Movie arg0) {
+		if(date.after(arg0.date))
+		{
+			return -1;
+		}
+		else if(date.before(arg0.date))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+		
+	}	
 }

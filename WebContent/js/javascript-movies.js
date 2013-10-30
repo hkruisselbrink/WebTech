@@ -1,0 +1,45 @@
+var movies = new Object();
+
+var getMovies = function(){
+	$.ajax({
+		url: "resources/movies",
+		dataType: "json",
+	}).fail(function(jgXHR, textStatus){
+		alert(jgXHR.status);
+	}).done(function(data){
+		$.each(data, function(key, movieObj){
+			$('<div class="object-line">')
+			.append('<img src="img/noImage.png" alt="poster" id="img' + key + '"</img>')
+			.append('<a href="movie.html?id=' + movieObj.ttNumber + '"<p>' + movieObj.title + '</p></a>')
+			.append('<div>')
+						.append('<img id="star' + key + '1" src="img/unratedStar.png" alt="star1"></img>')
+						.append('<img id="star' + key + '2" src="img/unratedStar.png" alt="star1"></img>')
+						.append('<img id="star' + key + '3" src="img/unratedStar.png" alt="star1"></img>')
+						.append('<img id="star' + key + '4" src="img/unratedStar.png" alt="star1"></img>')
+						.append('<img id="star' + key + '5" src="img/unratedStar.png" alt="star1"></img>')
+			.append('</div>')
+			.append('<div class="clearfix></div></div>')
+			.appendTo('#movies');
+			getMoviePoster(movieObj.ttNumber, "img" + key);
+			setStars(movieObj.avgRating, "star" + key);
+			
+		});
+	});
+};
+
+var getMoviePoster = function(id, key){
+	$.ajax({
+		url: "http://www.omdbapi.com/?i="+ id,
+		dataType: "json",
+	}).fail(function(jqXHR, textStatus){
+		alert(textStatus);
+	}).done(function(data){
+		$('#' + key).attr("src", data.Poster);
+		
+	});
+};
+
+$(document).ready(function(){
+	getMovies();
+	
+});

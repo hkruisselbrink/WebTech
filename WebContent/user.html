@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>NotFlix!</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="css/slater-theme.css" rel="stylesheet" type="text/css">
+<link href="css/stylesheet.css" rel="stylesheet" type="Text/css">
+</head>
+<body>
+
+	
+	<div class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">NotFlix</a>
+			</div>
+			
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Movies</a></li>
+					<li class="active"><a href="#">Users</a></li>
+				</ul>
+				
+				<div class="navbar-right" id="login-form">
+					<form class="navbar-form">
+						<div class="form-group">
+							<input type="text" placeholder="Username" class="form-control">
+						</div>
+						<div class="form-group">
+							<input type="password" placeholder="Password" class="form-control">
+						</div>
+						<button type="submit" class="btn btn-success">Sign in</button>
+						<button class="btn btn-danger">Register</button>
+					</form>
+				</div>
+				
+				<div class="navbar-right" id="logged-in-div">
+					<p id="logged-in-as" style="float:left; margin-right:10px"></p>
+					<button class="btn btn-danger">Logout</button>
+				</div>
+				
+			</div>
+		</div>	
+	</div>
+	
+	<div class="container">
+		<div class="jumbotron slider">
+			<div class="jumbotron-object">
+				
+				<figure>
+					<img id="jumbotron-poster" src="img/noImage.png" alt="film"></img>
+				</figure>
+				
+				<div class="jumbotron-info">
+					<h3 id="user-nickname"></h3>
+					<p id="user-realname"></p>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script> 
+	<script type="text/javascript" src="js/login.js"></script>
+	<script type="text/javascript" src="js/javascript-user.js"></script>
+
+</body>
+</html>

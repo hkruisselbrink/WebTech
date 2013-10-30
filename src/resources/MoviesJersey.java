@@ -19,7 +19,7 @@ import model.Rating;
 import model.User;
 
 @Path("/movies")
-@Produces({"application/json", "application/xml"})
+@Produces(MediaType.APPLICATION_JSON)
 public class MoviesJersey {
 
 	@Context ServletContext context;
@@ -71,6 +71,15 @@ public class MoviesJersey {
 			}
 		}
 		return temp;		
+	}
+	
+	@GET
+	@Path("newest")
+	public List<Movie> getNewestMovies()
+	{
+		Model model = (Model) context.getAttribute("model");
+		return model.newestMovies();
+
 	}
 	
 	

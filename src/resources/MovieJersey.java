@@ -26,8 +26,7 @@ public class MovieJersey {
 	
 	@GET
 	@Path("{id}")
-	public Movie getMovie(@PathParam("id") String id, @HeaderParam("access_token") String accessToken) {
-		System.out.println(id+ " " + accessToken);
+	public Movie getMovie(@PathParam("id") String id) {
 		Model model = (Model) context.getAttribute("model");
 		Movie temp = model.getMovie(id);
 		if(temp == null)

@@ -1,0 +1,59 @@
+.slider{
+	min-height:470px;
+	
+}
+
+.jumbotron-object{
+	max-width:600px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.jumbotron-info{
+	padding-left:240px;
+	margin-right:auto;
+	
+}
+
+.jumbotron-object p{
+	font-size:14px;
+	
+}
+
+.object-line{
+	width:100%;
+	background-color:#272B2E;
+	height:80px;
+}
+
+.object-line:hover{
+	background-color:#18191B;
+}
+
+.object-line img{
+	max-width: 50px;
+	float:left;
+}
+
+.clearfix{
+	float:none;
+}
+
+
+figure{
+	float:left;
+	}
+	
+#jumbotron-poster{
+	max-width:200px;
+	}
+	
+#older-arrow-slider{
+	float:right;
+}
+
+.stars{
+	float:left;
+}
+}
+	

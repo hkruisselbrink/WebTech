@@ -25,6 +25,7 @@ public class Login {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String loginUser(User user) {
 		Model model = (Model) context.getAttribute("model");
+		System.out.println("Pjotr is cool");
 		List<User> userList = model.getAllUsers();
 		User temp = null;
 		if(user.getNickname() == null || user.getPassword() == null)
@@ -41,7 +42,8 @@ public class Login {
 			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Invalid username or password").build());
 		}
 
-		return "{\"accept_token\":\"" + model.addClient(temp) + "\"}";
+		String v =  model.addClient(temp);
+		return "{\"access_token\":\"" + model.addClient(temp) + "\"}";
 		
 	}
 }

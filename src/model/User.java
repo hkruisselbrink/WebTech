@@ -29,8 +29,7 @@ public class User {
 		lastId++;
 	}
 
-	@XmlTransient
-	@JsonIgnore
+	
 	public String getId() {
 		return id;
 	}

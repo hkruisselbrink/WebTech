@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,10 +27,16 @@ public class UserJersey {
 	@GET
 	@Produces({"application/json", "application/xml"})
 
-	public User getUser(@PathParam("id") String id)
+	public User getUser(@PathParam("id") String id, @HeaderParam("access_token") String accessToken)
 	{
 		Model model = (Model) context.getAttribute("model");
 		User temp = model.getUser(id);
+		User me = model.checkAccessToken(accessToken);
+		if(me == null)
+		{
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Invalid access token").build());
+
+		}
 		if(temp == null)
 		{
 			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("User not found").build());
@@ -39,6 +46,21 @@ public class UserJersey {
 		{
 			return temp;
 		}
+	}
+	
+	@GET
+	@Path("me")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUserWithAcceptToken(@HeaderParam("access_token") String accessToken)
+	{
+		Model model = (Model) context.getAttribute("model");
+		User me = model.checkAccessToken(accessToken);
+		if(me == null)
+		{
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Invalid access token").build());
+
+		}
+		return me;
 	}
 	
 	@POST

@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -22,13 +23,17 @@ public class Model {
 		users = new ArrayList<User>();
 		
 		movies.add(new Movie("tt0120889", 113, "What dreams may come", "Vincent Ward", "Mooie film enzo", new GregorianCalendar(1998, 9, 2)));
-		movies.add(new Movie("tt0373883", 109, "Halloween", "Rob Zombie", "Enge film enzoo",new GregorianCalendar(2007, 7, 31)));
-		movies.add(new Movie("tt0076759", 121, "Star Wars Episode 4 - A New Hope", "George Lucas", "Coole film enzoo", new GregorianCalendar(1977, 4, 25)));
+		movies.add(new Movie("tt0373883", 109, "Halloween", "Rob Zombie", "After being committed for 17 years, Michael Myers, now a grown man and still very dangerous, escapes from the mental institution (where he was committed as a 10 year old) and he immediately returns to Haddonfield, where he wants to find his baby sister, Laurie. Anyone who crosses his path is in mortal danger.",new GregorianCalendar(2007, 7, 31)));
+		movies.add(new Movie("tt0076759", 121, "Star Wars Episode 4 - A New Hope", "George Lucas", "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a wookiee and two droids to save the universe from the Empire's world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader.", new GregorianCalendar(1977, 4, 25)));
 				
 		users.add(new User("Janus", "de", "Henk", "Henkiedejanus9919912", "ikheetjanusvandeachternaam"));
 		users.add(new User("Piet", "van", "Diederiksen", "Diederikje1", "ikhouvanpuppies"));
+		User temp = new User("Pjotr", "de", "Bruin", "pjoow", "oke");
+		users.add(temp);
 
 		clients = new HashMap<User, String>();
+		clients.put(temp, "1");
+		
 	}
 	
 	public User checkAccessToken(String accessToken)
@@ -197,6 +202,12 @@ public class Model {
 		//check of het niet leeg is
 		
 		users.add(user);
+	}
+	
+	public List<Movie> newestMovies()
+	{
+		Collections.sort(movies);
+		return movies.subList(0, 2);
 	}
 
 
