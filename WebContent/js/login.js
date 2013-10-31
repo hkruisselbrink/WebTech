@@ -85,6 +85,7 @@ $('#submit-login').click(function(){
 $('#logout-button').click(function(){
 	logout();
 	$('#my-ratings').hide();
+	window.location.href = "http://localhost:8080/Webtech3/";
 });
 
 

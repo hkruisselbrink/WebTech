@@ -23,25 +23,31 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="index.html">Home</a></li>
-					<li><a href="movies.html">Movies</a></li>
+					<li class="dropdown">
+            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Movies <b class="caret"></b></a>
+             			<ul class="dropdown-menu">
+                			<li><a href="movies.html">All movies</a></li>
+                			<li><a href="movies.html?type=rated">Rated movies</a></li>
+                			<li><a href="movies.html?type=myratings" id="my-ratings">My ratings</a></li>                
+              			</ul>
+            		</li>
 					<li class="active"><a href="users.html">Users</a></li>
 				</ul>
 				
 				<div class="navbar-right" id="login-form">
-					<form class="navbar-form" id="login-form-form">
+					<div class="navbar-form" id="login-form-form">
 						
 							<input class="form-group" type="text" placeholder="Username" id="username-box" class="form-control">
 							<input class="form-group" type="password" placeholder="Password" id="password-box" class="form-control">
-						<button type="submit" class="btn btn-success">Sign in</button>
-						<a href="register.html" class="register-button"><button class="btn btn-danger">Register</button></a>
-					</form>
+						<button id="submit-login" class="btn btn-success">Sign in</button>
+						<a id="submit-register" href="register.html" class="register-button"><button class="btn btn-danger">Register</button></a>
+					</div>
 				</div>
 				
 				<div class="navbar-right" id="logged-in-div">
 					<p id="logged-in-as" style="float:left; margin-right:10px"></p>
 					<button class="btn btn-danger" id="logout-button">Logout</button>
 				</div>
-				
 			</div>
 		</div>	
 	</div>
