@@ -9,13 +9,26 @@ var getUsers = function(){
 	}).fail(function(jgXHR, textStatus){
 		alert('poop');
 	}).done(function(data){
-		$.each(data, function(key, userObj){
-			$('<div class="object-line">')
-			.append('<img src="img/noImage.png" alt="profile pic"</img>')
-			.append('<a href="user.html?id=' + userObj.id + '"<p>' + userObj.nickname + '</p></a>')
-			.append('<div class="clearfix></div></div>')
-			.appendTo('#users');
-		});
+		accessToken = localStorage.getItem("accessToken");
+		if(accessToken === null){
+			$.each(data, function(key, userObj){
+				$('<div class="object-line">')
+				.append('<img src="img/noImage.png" alt="profile pic"</img>')
+				.append('<a href="#"<p>' + userObj.nickname + '</p></a>')
+				.append('<div class="clearfix></div></div>')
+				.appendTo('#users');
+			});
+		}
+		else{
+			$.each(data, function(key, userObj){
+				$('<div class="object-line">')
+				.append('<img src="img/noImage.png" alt="profile pic"</img>')
+				.append('<a href="user.html?id=' + userObj.id + '"<p>' + userObj.nickname + '</p></a>')
+				.append('<div class="clearfix></div></div>')
+				.appendTo('#users');
+			});
+		}
+		
 	});
 };
 

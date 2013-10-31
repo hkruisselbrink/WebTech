@@ -79,6 +79,7 @@ $('#submit-login').click(function(){
 	}else{
 		getAccessToken(username, password);
 		$('#my-ratings').show();
+		location.reload();
 	};
 });
 
