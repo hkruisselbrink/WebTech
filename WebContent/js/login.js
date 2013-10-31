@@ -60,8 +60,10 @@ $(document).ready(function(){
 	if(accessToken === null){
 		$('#login-form').show();
 		$('#logged-in-div').hide();
+		$('#my-ratings').hide();
 	}else{
 		getUser(accessToken);
+		$('#my-ratings').show();
 	};	
 	
 });
@@ -74,11 +76,15 @@ $('#submit-login').click(function(){
 		alert("Vul alle velden in");
 	}else{
 		getAccessToken(username, password);
+		$('#my-ratings').show();
+		location.reload();
 	};
 });
 
 $('#logout-button').click(function(){
 	logout();
+	$('#my-ratings').hide();
+	window.location.href = "http://localhost:8080/Webtech3/";
 });
 
 
