@@ -1,13 +1,20 @@
 var getUsers = function(){
+	accessToken = localStorage.getItem('accessToken');
+	if(accessToken == null){
+		alert("You're not logged in");
+		return;
+	}
 	$.ajax({
 		url: "resources/users",
 		dataType: "json",
 		beforeSend: function (request)
         {
-            request.setRequestHeader("access_token", 1);
+            request.setRequestHeader("access_token", accessToken);
         },
 	}).fail(function(jgXHR, textStatus){
-		alert('poop');
+		if(jgXHR.responseText === "Invalid access token"){
+			alert("You're not logged in");
+		}
 	}).done(function(data){
 		$.each(data, function(key, userObj){
 			$('<div class="object-line">')

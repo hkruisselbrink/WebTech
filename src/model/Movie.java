@@ -64,6 +64,10 @@ public class Movie implements Comparable<Movie>{
 	public double getAvgRating() {
 		return avgRating;
 	}
+	
+	public boolean getRatedByMe(){
+		return ratedByMe;
+	}
 
 	public String getDate() {
 		SimpleDateFormat jsonDateFormat =  new SimpleDateFormat("MMM d yyyy", Locale.ENGLISH);
