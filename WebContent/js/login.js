@@ -48,10 +48,8 @@ var getAccessToken = function(username, password){
 	}).fail(function(jgXHR, textStatus){
 		alert(jgXHR.status);
 	}).done(function(data){
-		alert("done");
 		var accessToken = data.access_token;
 		localStorage.setItem('accessToken', accessToken);
-		alert(accessToken);
 		getUser(accessToken);
 	});
 };

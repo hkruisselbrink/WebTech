@@ -3,11 +3,10 @@ var login = function(username, password){
 	var jsonObject = new Object();
 	jsonObject['nickname'] = username;
 	jsonObject['password'] = password;
-
 	
 	$.ajax({
 		type: "POST",
-		url: "resources/login",
+		url: "../resources/login",
 		contentType: "application/json; charset=UTF-8",
 		data: JSON.stringify(jsonObject),
 		dataType:"json"

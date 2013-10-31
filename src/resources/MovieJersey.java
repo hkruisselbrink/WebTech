@@ -26,7 +26,7 @@ public class MovieJersey {
 	
 	@GET
 	@Path("{id}")
-	public Movie getMovie(@PathParam("id") String id) {
+	public Movie getMovie(@PathParam("id") String id, @HeaderParam("access_token") String accessToken) {
 		Model model = (Model) context.getAttribute("model");
 		Movie temp = model.getMovie(id);
 		if(temp == null)
@@ -35,8 +35,28 @@ public class MovieJersey {
 		}
 		else
 		{
+			System.out.println(temp.getRatedByMe());
 			temp.setAvgRating(model.getAvgRatingMovie(temp));
-			if(model.ratedByUser(temp, null));
+			if(!accessToken.equals(""))
+			{
+				User user = model.checkAccessToken(accessToken);
+				if(user != null)
+				{
+					if(model.ratedByUser(temp, user))
+					{
+						temp.setRatedByMe(true);
+					}
+					else
+					{
+						temp.setRatedByMe(false);
+					}
+				}
+				else
+				{
+					temp.setRatedByMe(false);
+				}
+			}
+			System.out.println(temp.getRatedByMe());
 			return temp;
 		}
 	}
