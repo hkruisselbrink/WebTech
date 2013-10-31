@@ -27,17 +27,7 @@ var getMovies = function(){
 	});
 };
 
-var getMoviePoster = function(id, key){
-	$.ajax({
-		url: "http://www.omdbapi.com/?i="+ id,
-		dataType: "json",
-	}).fail(function(jqXHR, textStatus){
-		alert(textStatus);
-	}).done(function(data){
-		$('#' + key).attr("src", data.Poster);
-		
-	});
-};
+
 
 $(document).ready(function(){
 	getMovies();

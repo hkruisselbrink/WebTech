@@ -1,17 +1,4 @@
-var getParams = function(){
-
-    var params = {},
-        pairs = document.URL.split('?')
-               .pop()
-               .split('&');
-
-    for (var i = 0, p; i < pairs.length; i++) {
-           p = pairs[i].split('=');
-           params[ p[0] ] =  p[1];
-    }     
-
-    return params;
-};
+var movie = new Object();
 
 var setMovie = function(id){
 	$.ajax({
@@ -20,6 +7,7 @@ var setMovie = function(id){
 	}).fail(function(jgXHR, textStatus){
 		alert("faaal");
 	}).done(function(data){
+		movie = data;
 		$('#movie-title-slider').text(data.title);
 		$('#movie-description-slider').text(data.description);
 		$('#movie-director-slider').text("Director: " + data.director);

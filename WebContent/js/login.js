@@ -1,3 +1,4 @@
+
 var user = new Object();
 
 var logout = function(){

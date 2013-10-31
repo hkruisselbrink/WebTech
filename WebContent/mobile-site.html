@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>NotFlix! Mobile</title>
+	<meta name="viewport" content="width=device-width, initial scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"/>
+	<script type="text/javascript" src="js/jquery.js"><</script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"><</script>
+
+</head>
+<body>
+
+	<div data-role="page" id="loginpage">
+	
+	
+		<div data-role="header">
+		
+			<h1>Please login</h1>
+		
+		</div>
+		
+		<div data-role="content">
+		
+			<div data-role="fieldcontain">
+		
+				<label for="name">Username: </label>
+				<input type="text" name="name" id="username-box" value=""/>
+		
+			</div>
+			
+			<div data-role="fieldcontain">
+		
+				<label for="name">Password: </label>
+				<input type="password" name="name" id="password-box" value=""/>
+		
+			</div>
+			
+			<a href="#" data-role="button" id="submit-button">Submit</a>
+		
+		</div>
+	
+	</div>
+	
+	<div data-role="page" id="moviespage">
+	
+		<div data-role="header">
+		
+			<h1>HELLO</h1>
+			<a href="#" data-role="button" id="logout-button">Log out</a>
+		
+		</div>
+		
+		<div data-role="content">
+		
+			<ul id="movieList" data-role="listview" data-inset="true" data-filter="true">
+			
+				<li><a href="#">Lord of the Rings</a></li>
+				<li><a href="#">Star wars</a></li>	
+			
+			</ul>
+		
+		</div>
+		
+		<div data-role="footer">
+		
+			<h4>WAT HIERBOVEN STAAT KLOPT</h4>
+		
+		</div>
+	
+	</div>
+	
+	<script type="text/javascript" src="js/javascript-mobile.js"></script>
+
+</body>
+</html>

@@ -61,12 +61,12 @@ $(document).ready(function(){
 });
 
 $('#rate-select').change(function(){
-	
 	var rating = $("#rate-select option:selected").text();
 	rateMovie(rating);
 });
 
 var rateMovie = function(rating){
+	alert("ha");
 	$.ajax({
 		type: "POST",
 		url: "resources/movie/" + movie.ttNumber + "/rate",
@@ -81,4 +81,21 @@ var rateMovie = function(rating){
 	}).done(function(data){
 		alert("yay");
 	});
+	alert("yayyayaya");
+};
+
+var getParams = function(){
+	alert("im here");
+
+    var params = {},
+        pairs = document.URL.split('?')
+               .pop()
+               .split('&');
+
+    for (var i = 0, p; i < pairs.length; i++) {
+           p = pairs[i].split('=');
+           params[ p[0] ] =  p[1];
+    }     
+
+    return params;
 };

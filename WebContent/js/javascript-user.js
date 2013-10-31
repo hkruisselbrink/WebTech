@@ -1,25 +1,14 @@
-var getParams = function(){
 
-    var params = {},
-        pairs = document.URL.split('?')
-               .pop()
-               .split('&');
 
-    for (var i = 0, p; i < pairs.length; i++) {
-           p = pairs[i].split('=');
-           params[ p[0] ] =  p[1];
-    }     
 
-    return params;
-};
-
-var setUser = function(id){
+var setUser = function(id, accessToken){
+	alert(accessToken);
 	$.ajax({
 		url: "resources/user/" + id,
 		dataType: "json",
 		beforeSend: function (request)
         {
-            request.setRequestHeader("access_token", 1);
+            request.setRequestHeader("access_token", accessToken);
         },
 	}).fail(function(jgXHR, textStatus){
 		alert(jgXHR.status);
@@ -38,6 +27,12 @@ var setUser = function(id){
 $(document).ready(function(){
 	var params = getParams();
 	var id = params['id'];
-	setUser(id);
+	accessToken = localStorage.getItem("accessToken");
+	if(accessToken === null){
+		alert("Please log in to see this user");
+	}
+	else{
+		setUser(id, accessToken);
+	}
 	
 });
