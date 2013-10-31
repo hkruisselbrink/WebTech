@@ -68,6 +68,21 @@ public class Model {
 		return ratings;
 	}
 	
+	public boolean ratedByUser(Movie movie, User user)
+	{
+		for(Rating rating : ratings)
+		{
+			if(rating.getMovie() == movie)
+			{
+				if(rating.getUser() == user)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public void addRating(Movie movie, User user, double rating)
 	{
 		Rating ratingObj = new Rating(user, movie, rating);

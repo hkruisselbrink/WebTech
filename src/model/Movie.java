@@ -17,6 +17,7 @@ public class Movie implements Comparable<Movie>{
 	private String title, director, description, ttNumber;
 	private GregorianCalendar date;
 	private double avgRating = 0;
+	private boolean ratedByMe = false;
 	
 	public Movie() {
 		
@@ -73,6 +74,11 @@ public class Movie implements Comparable<Movie>{
 	{
 		System.out.println("setAvgRating" + avgRating);
 		this.avgRating = avgRating;
+	}
+	
+	public void setRatedByMe(boolean status)
+	{
+		ratedByMe = status;
 	}
 	
 	public void setLength(int length) { }

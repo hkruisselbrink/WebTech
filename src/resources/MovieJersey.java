@@ -36,6 +36,7 @@ public class MovieJersey {
 		else
 		{
 			temp.setAvgRating(model.getAvgRatingMovie(temp));
+			if(model.ratedByUser(temp, null));
 			return temp;
 		}
 	}

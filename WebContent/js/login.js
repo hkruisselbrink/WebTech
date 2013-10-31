@@ -6,6 +6,7 @@ var logout = function(){
 		localStorage.removeItem('accessToken');
 		$('#login-form').show();
 		$('#logged-in-div').hide();
+		
 	}
 };
 
@@ -47,8 +48,10 @@ var getAccessToken = function(username, password){
 	}).fail(function(jgXHR, textStatus){
 		alert(jgXHR.status);
 	}).done(function(data){
+		alert("done");
 		var accessToken = data.access_token;
 		localStorage.setItem('accessToken', accessToken);
+		alert(accessToken);
 		getUser(accessToken);
 	});
 };
@@ -70,7 +73,7 @@ $('#submit-login').click(function(){
 	var password = $('#password-box').val();
 	
 	if(username === "" || password === ""){
-		alert("null homo");
+		alert("Vul alle velden in");
 	}else{
 		getAccessToken(username, password);
 	};
