@@ -14,6 +14,9 @@ public class Model {
 	private ArrayList<User> users;
 	private HashMap<User, String> clients;
 	
+	/**
+	 * Constructor voor het model. Hier worden de lijsten met data geinitialiseerd en de initiële data wordt hieraan toegevoegd. 
+	 */
 	public Model()
 	{
 		movies = new ArrayList<Movie>();
@@ -38,6 +41,11 @@ public class Model {
 		
 	}
 	
+	/**
+	 * Bekijkt of de meegegeven access token in het systeem aanwezig is. Als deze aanwezig is, wordt de bijbehorende gebruiker terug gegeven.
+	 * @param accessToken the access token die gecontroleerd wordt.
+	 * @return de user als de access token aanwezig is, anders null.
+	 */
 	public User checkAccessToken(String accessToken)
 	{
 		if(clients.containsValue(accessToken))
@@ -54,6 +62,11 @@ public class Model {
 		return null;
 	}
 	
+	/**
+	 * Bekijkt of een user al aanwezig is in het systeem. Zo niet, dan wordt deze toegevoegd met een nieuwe access token
+	 * @param user de user die toegevoegd wil worden
+	 * @return de access token die bij de opgegeven user hoort.
+	 */
 	public String addClient(User user) {
 		if(clients.containsKey(user)) {
 			return clients.get(user);
@@ -64,10 +77,20 @@ public class Model {
 		}
 	}
 	
+	/**
+	 * Geeft lijst met alle ratings
+	 * @return lijst met alle ratings
+	 */
 	public ArrayList<Rating> getRatings() {
 		return ratings;
 	}
 	
+	/**
+	 * Controleerd of de opgegeven movie al gerate is door de opgegeven user.
+	 * @param movie de movie die gecontroleerd moet worden
+	 * @param user de user die gecontroleerd moet worden
+	 * @return true als movie door user gerate is, anders false
+	 */
 	public boolean ratedByUser(Movie movie, User user)
 	{
 		for(Rating rating : ratings)
@@ -83,6 +106,13 @@ public class Model {
 		return false;
 	}
 	
+	/**
+	 * Maakt aan de hand van movie, user en rating een rating object. Dit object wordt toegevoegd aan de lijst met ratings. 
+	 * Daarna wordt voor de movie nog de gemiddelde rating bepaald en opgeslagen.
+	 * @param movie de movie waarvoor een rating wordt toegevoegd
+	 * @param user de user die de rating toevoegd
+	 * @param rating de rating voor de rating die wordt toegevoegd.
+	 */
 	public void addRating(Movie movie, User user, double rating)
 	{
 		Rating ratingObj = new Rating(user, movie, rating);
@@ -91,6 +121,13 @@ public class Model {
 		System.out.println(ratings.toString());
 	}
 	
+	/**
+	 * Veranderd de rating-variabele van het meegeven rating-object in de meegegeven ratingNumber. 
+	 * Daarna wordt voor de meegegeven film de gemiddelde rating bepaald en opgeslagen.
+	 * @param rating de rating die aangepast moet worden
+	 * @param ratingNumber de nieuwe rating die opgeslagen moet worden
+	 * @param movie de film wiend rating geupdate moet worden.
+	 */
 	public void changeRating(Rating rating, double ratingNumber, Movie movie)
 	{
 		rating.setRating(ratingNumber);
@@ -98,11 +135,22 @@ public class Model {
 		System.out.println(ratings.toString());
 	}
 	
+	/**
+	 * Verwijdert de opgegeven rating uit het model. Past daarna de gemiddelde rating van de opgegeven film aan.
+	 * @param rating de rating die verwijdert moet worden.
+	 * @param movie de films wiens rating geupdate moet worden.
+	 */
 	public void removeRating(Rating rating, Movie movie) {
 		ratings.remove(rating);
 		movie.setAvgRating(getAvgRatingMovie(movie));
 	}
 	
+	/**
+	 * Controleert of er een rating is met de opgegeven movie en user. Indien aanwezig, wordt deze teruggegeven.
+	 * @param movie de movie wiens rating opgehaald wordt.
+	 * @param user de user wiens rating opgehaald wordt.
+	 * @return als rating aanwezig is wordt deze teruggegeven, anders null
+	 */
 	public Rating getRating(Movie movie, User user)
 	{
 		List<Rating> tempRatings = getAllRatingsMovie(movie);
@@ -116,6 +164,11 @@ public class Model {
 		return null;
 	}
 	
+	/**
+	 * Controleert of er een rating is met de opgegeven movie en user. Indien aanwezig, wordt deze verwijdert.
+	 * @param movie de movie wiens rating verwijdert wordt
+	 * @param user de user wiens rating verwijdert wordt
+	 */
 	public void deleteRating(Movie movie, User user)
 	{
 		for(Rating r: ratings) {
@@ -126,6 +179,11 @@ public class Model {
 		
 	}
 	
+	/**
+	 * Creëert een access token en bekijkt of deze al bestaat, zo niet dan wordt deze terug gegeven. 
+	 * Als de rating al wel bestaat roept de methode zichzelf weer aan.
+	 * @return de gecreëerde rating
+	 */
 	public String createToken() {
 		int i = 0;
 		i = (int) (Math.random()*1000000000);
@@ -136,6 +194,10 @@ public class Model {
 		return token;
 	}
 	
+	/**
+	 * Geeft lijst met alle films
+	 * @return lijst met alle films
+	 */
 	public List<Movie> getAllMovies()
 	{
 		return movies;
@@ -153,6 +215,11 @@ public class Model {
 		return null;
 	}
 	
+	/**
+	 * Haalt alle ratings op van de opgegeven movie en maakt hier een gemiddelde van. Dit gemiddelde wordt teruggegeven
+	 * @param movie de movie wiens rating opgehaald wordt.
+	 * @return de gemiddelde rating
+	 */
 	public double getAvgRatingMovie(Movie movie)
 	{
 		List<Rating> temp = getAllRatingsMovie(movie);
@@ -168,6 +235,11 @@ public class Model {
 		return total/temp.size();
 	}
 	
+	/**
+	 * Geeft een lijst met alle ratings voor de opgegeven movie.
+	 * @param movie de movie wiens ratings opgehaald worden.
+	 * @return lijst met alle ratings van opgegeven movie.
+	 */
 	public List<Rating> getAllRatingsMovie(Movie movie)
 	{
 		List<Rating> temp = new ArrayList<Rating>();
@@ -182,12 +254,20 @@ public class Model {
 		return temp;
 	}
 	
+	/**
+	 * Geeft een lijst met alle gebruikers
+	 * @return lijst met alle gebruikers
+	 */
 	public List<User> getAllUsers()
 	{
 		return users;
 	}
 	
-	
+	/**
+	 * Controleert of er een user is met de opgegeven id. Zo ja, dan wordt deze user teruggegeven.
+	 * @param id de id die gecontroleert moet worden
+	 * @return de user die bij de id hoort, anders null.
+	 */
 	public User getUser(String id)
 	{
 		for(User u : users)
@@ -201,6 +281,12 @@ public class Model {
 		return null;
 	}
 	
+	/**
+	 * Controleert of het opgegeven user object volledig is ingevuld en of de nickname van deze user niet al bestaat. 
+	 * Zo niet, dan wordt de opgegeven user toegevoegd aan het model.
+	 * @param user de user die gecontroleert en toegevoegd moet worden.
+	 * @throws IOException als user niet compleet is "user not complete", als user al bestaat "user already exists".
+	 */
 	public void addUser(User user) throws IOException
 	{
 		if(!user.userComplete())

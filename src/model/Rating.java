@@ -10,6 +10,12 @@ public class Rating {
 	private Movie movie;
 	private double rating;
 	
+	/**
+	 * Constructor voor het maken van een rating object.
+	 * @param user de user die opgeslagen wordt
+	 * @param movie de movie die opgeslagen wordt
+	 * @param rating de rating die opgeslagen wordt
+	 */
 	public Rating(User user, Movie movie, double rating)
 	{
 		this.user = user;

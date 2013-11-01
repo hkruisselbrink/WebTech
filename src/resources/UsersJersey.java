@@ -20,9 +20,15 @@ public class UsersJersey {
 	
 	@Context ServletContext context;
 	
+	/**
+	 * Methode voor het ophalen van een lijst met alle users. 
+	 * Eerst wordt bekeken of de opgegeven accessToken bestaat.
+	 * Produceert een JSON array aan de hand van de return result.
+	 * @param accessToken de access token van de gebruiker
+	 * @return lijst met alle geregisteerde gebruikers.
+	 */
 	@GET
 	@Produces({"application/json", "application/xml"})
-
 	public ArrayList<User> getUsers(@HeaderParam("access_token") String accessToken)
 	{
 		Model model = (Model) context.getAttribute("model");

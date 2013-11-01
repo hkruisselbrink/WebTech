@@ -19,10 +19,22 @@ public class Movie implements Comparable<Movie>{
 	private double avgRating = 0;
 	private boolean ratedByMe = false;
 	
+	/**
+	 * empty constructor
+	 */
 	public Movie() {
 		
 	}
 	
+	/**
+	 * Constructor voor het maken van een movie object. Tijdens het aanmaken wordt de statische variable lastId 1 opgehoogd.
+	 * @param ttNumber de movie ttNumber die opgeslagen wordt.
+	 * @param length de movie lengte die opgeslagen wordt.
+	 * @param title de movie title die opgeslagen wordt.
+	 * @param director de movie director die opgeslagen wordt.
+	 * @param description de movie description die opgeslagen wordt.
+	 * @param date de movie date die opgeslagen wordt.
+	 */
 	public Movie(String ttNumber, int length, String title, String director, String description, GregorianCalendar date)
 	{
 		this.id = lastId;

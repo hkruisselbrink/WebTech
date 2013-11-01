@@ -24,6 +24,11 @@ public class MoviesJersey {
 
 	@Context ServletContext context;
 	
+	/**
+	 * Methode voor het ophalen van een lijst met films. Tijdens het maken van deze lijst wordt per movie de gemiddelde rating ingesteld.
+	 * Produceert een JSON array aan de hand van de return result.
+	 * @return lijst me alle films
+	 */
 	@GET
 	public ArrayList<Movie> getMovies() {
 		Model model = (Model) context.getAttribute("model");
@@ -35,6 +40,14 @@ public class MoviesJersey {
 		return temp;
 	}
 	
+	/**
+	 * Methode voor het ophalen een lijst met alle ratings van de ingelogde gebruiker. 
+	 * Eerst wordt gecontroleerd of de meegegeven access token bestaat.
+	 * Als de access token correct is, wordt er een lijst gemaakt met alle ratings van enkel de ingelogde gebruiker.
+	 * Produceert een JSON array aan de hand van de return result.
+	 * @param accessToken de access token van de gebruiker
+	 * @return een lijst met alle ratings.
+	 */
 	@GET
 	@Path("ratings")
 	public ArrayList<Rating> getRatings(@HeaderParam("access_token") String accessToken)
@@ -57,6 +70,11 @@ public class MoviesJersey {
 		return temp;
  	}
 	
+	/**
+	 * Methode voor het ophalen van een lijst met alle films die een rating hebben.
+	 * Produceert een JSON array aan de hand van de return result.
+	 * @return lijst met alle films die een rating hebben
+	 */
 	@GET
 	@Path("avgRatings")
 	public ArrayList<Movie> getMoviesWithRating()
@@ -72,7 +90,7 @@ public class MoviesJersey {
 		}
 		return temp;		
 	}
-	
+
 	@GET
 	@Path("newest")
 	public List<Movie> getNewestMovies(@HeaderParam("access_token") String accessToken)

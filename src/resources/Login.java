@@ -17,12 +17,19 @@ import model.User;
 
 @Path("/login")
 @Consumes({"application/json", "application/xml"})
+@Produces(MediaType.APPLICATION_JSON)
 public class Login {
 	
 	@Context ServletContext context;
 
+	/**
+	 * Methode voor het inloggen van een gebruiker. Eerst wordt gekeken of het user object voldoende ingevuld is. 
+	 * Daarna of de user in het systeem staat. Zo ja, dan wordt de client in het systeem gezet en wordt de access token teruggegeven.
+	 * De opgegeven user moet in een JSONarray beschreven worden.
+	 * @param user de user die ingelogd wordt
+	 * @return de access token
+	 */
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
 	public String loginUser(User user) {
 		Model model = (Model) context.getAttribute("model");
 		System.out.println("Pjotr is cool");

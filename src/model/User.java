@@ -12,12 +12,23 @@ public class User {
 	private String lastName, tussenvoegsel, firstName, nickname, password, id;
 	private static int lastId = 1000;
 
+	/**
+	 * lege contructor. Tijdens het aanmaken wordt de lastId variabele opgehoogd.
+	 */
 	public User()
 	{
 		id = "u" + (lastId + 1);
 		lastId++;
 	}
-	
+
+	/**
+	 * Constructor voor het maken van een user object. Tijdens het aanmaken wordt de lastId variabele opgehoogd.
+	 * @param lastName de lastName die opgeslagen wordt
+	 * @param tussenvoegsel het tussenvoegsel dat opgeslagen wordt
+	 * @param firstName de firstName die opgeslagen wordt
+	 * @param nickname de nickname die opgeslagen wordt
+	 * @param password de password die opgeslagen wordt
+	 */
 	public User(String lastName,String tussenvoegsel,String firstName,String nickname,String password)
 	{
 		id = "u" + (lastId + 1);
@@ -61,6 +72,10 @@ public class User {
 		return nickname + password + firstName + tussenvoegsel + lastName;
 	}
 	
+	/**
+	 * controleert of dit user object wel volledig is ingevuld.
+	 * @return Als alles ingevuld wordt true teruggegeven, anders false
+	 */
 	public boolean userComplete()
 	{
 		if(nickname != null && !nickname.equals("") && password != null && !password.equals("") && firstName != null && !firstName.equals("") && lastName != null && !lastName.equals(""))
