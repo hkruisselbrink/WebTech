@@ -28,8 +28,18 @@ public class Model {
 
 		movies.add(m1);
 		movies.add(m2);
+		movies.add(new Movie("tt1981115", 120, "Thor: The Dark World (2013)", "Alan Taylor", "Faced with an enemy that even Odin and Asgard cannot withstand, Thor must embark on his most perilous and personal journey yet, one that will reunite him with Jane Foster and force him to sacrifice everything to save us all.", new GregorianCalendar(2013, 10, 8)));
+		movies.add(new Movie("tt1133985", 114, "Green Lantern", "Martin Campbell", "A test pilot is granted an alien ring that bestows him with otherworldly powers, as well as membership into an intergalactic squadron tasked with keeping peace within the universe.", new GregorianCalendar(2011, 6, 17)));
+		movies.add(new Movie("tt0111161", 142, "The Shawshank Redemption", "Frank Darabont", "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.", new GregorianCalendar(1994, 9, 14)));
+		movies.add(new Movie("tt0458339", 124, "Captain America: The First Avenger", "Joe Johnston", "After being deemed unfit for military service, Steve Rogers volunteers for a top secret research project that turns him into Captain America, a superhero dedicated to defending USA ideals.", new GregorianCalendar(2011, 5, 22)));
+		movies.add(new Movie("tt0120689", 189, "The Green Mile", "Frank Darabont", "The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, yet who has a mysterious gift.", new GregorianCalendar(1999, 11, 10)));
+		movies.add(new Movie("tt1201607", 130, "Harry Potter and the Deathly Hallows: Part 2", "David Yates", "Harry, Ron and Hermione search for Voldemort's remaining Horcruxes in their effort to destroy the Dark Lord.", new GregorianCalendar(2011, 6, 15)));
+		movies.add(new Movie("tt0241527", 152, "Harry Potter and the Sorcerer's Stone", "Chris Columbus", "Rescued from the outrageous neglect of his aunt and uncle, a young boy with a great destiny proves his worth while attending Hogwarts School of Witchcraft and Wizardry.", new GregorianCalendar(2001, 9, 16)));
 		movies.add(new Movie("tt0076759", 121, "Star Wars Episode 4 - A New Hope", "George Lucas", "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a wookiee and two droids to save the universe from the Empire's world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader.", new GregorianCalendar(1977, 4, 25)));
-				
+
+		
+		
+		
 		users.add(new User("Janus", "de", "Henk", "Henkiedejanus9919912", "ikheetjanusvandeachternaam"));
 		users.add(new User("Piet", "van", "Diederiksen", "test", "test"));
 		User temp = new User("Pjotr", "de", "Bruin", "pjoow", "oke");
@@ -38,6 +48,8 @@ public class Model {
 
 		clients = new HashMap<User, String>();
 		clients.put(temp, "1");
+		
+		Collections.sort(movies);
 		
 	}
 	
@@ -307,11 +319,7 @@ public class Model {
 		users.add(user);
 	}
 	
-	public List<Movie> newestMovies()
-	{
-		Collections.sort(movies);
-		return movies.subList(0, 2);
-	}
+	
 
 
 

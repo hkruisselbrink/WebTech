@@ -125,14 +125,14 @@ var rateMovie = function(rating){
 };
 
 
-$(document).on("pageshow", "#loginpage", function(){
+$(document).on("pageinit", "#loginpage", function(){
 	if(localStorage.getItem('accessToken') != null){
 		$.mobile.changePage('#moviespage');
 	}
 	
 });
 
-$(document).on("pageshow", "#moviespage", function(){
+$(document).on("pageinit", "#moviespage", function(){
 	var accessToken = localStorage.getItem('accessToken');
 	if(accessToken == null){
 		alert('Not logged in');
@@ -143,7 +143,7 @@ $(document).on("pageshow", "#moviespage", function(){
 	
 });
 
-$(document).on("pageshow", "#moviepage", function(){
+$(document).on("pageinit", "#moviepage", function(){
 	var accessToken = localStorage.getItem('accessToken');
 	if(accessToken == null){
 		alert('Not logged in');

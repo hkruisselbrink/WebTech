@@ -115,39 +115,7 @@ public class MoviesJersey {
 		return temp;		
 	}
 
-	@GET
-	@Path("newest")
-	public List<Movie> getNewestMovies(@HeaderParam("access_token") String accessToken)
-	{
-		Model model = (Model) context.getAttribute("model");
-		ArrayList<Movie> temp = new ArrayList<Movie>();
-		System.out.println(accessToken);
-		for(int i = 0; i < model.getAllMovies().size(); i++) {
-			model.getAllMovies().get(i).setAvgRating(model.getAvgRatingMovie(model.getAllMovies().get(i)));
-			if(!accessToken.equals("null"))
-			{
-				User user = model.checkAccessToken(accessToken);
-				if(user != null)
-				{
-					if(model.ratedByUser(model.getAllMovies().get(i), user))
-					{
-						model.getAllMovies().get(i).setRatedByMe(true);
-					}
-					else
-					{
-						model.getAllMovies().get(i).setRatedByMe(false);
-					}
-				}
-				else
-				{
-					throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Invalid access token").build());
-				}
-			}
-			temp.add(model.getAllMovies().get(i));
-		}
-		return model.newestMovies();
 
-	}
 	
 	
 }

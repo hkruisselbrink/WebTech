@@ -4,7 +4,7 @@ var movie = new Object();
 var loadNewMovies = function(){
 	accessToken = localStorage.getItem('accessToken');
 	$.ajax({
-		url: "resources/movies/newest",
+		url: "resources/movies",
 		dataType: "json",
 		beforeSend: function (request)
         {
