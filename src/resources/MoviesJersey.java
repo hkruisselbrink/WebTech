@@ -25,14 +25,38 @@ public class MoviesJersey {
 	@Context ServletContext context;
 	
 	@GET
-	public ArrayList<Movie> getMovies() {
+	public ArrayList<Movie> getMovies(@HeaderParam("access_token") String accessToken) {
 		Model model = (Model) context.getAttribute("model");
-		ArrayList<Movie> temp = (ArrayList<Movie>) model.getAllMovies();
-		for(Movie m : temp)
-		{
-			m.setAvgRating(model.getAvgRatingMovie(m));
+		ArrayList<Movie> temp = new ArrayList<Movie>();
+		System.out.println(accessToken);
+		for(int i = 0; i < model.getAllMovies().size(); i++) {
+			model.getAllMovies().get(i).setAvgRating(model.getAvgRatingMovie(model.getAllMovies().get(i)));
+			if(accessToken != null)
+			{
+				if(!accessToken.equals("null"))
+				{
+					User user = model.checkAccessToken(accessToken);
+					if(user != null)
+					{
+						if(model.ratedByUser(model.getAllMovies().get(i), user))
+						{
+							model.getAllMovies().get(i).setRatedByMe(true);
+						}
+						else
+						{
+							model.getAllMovies().get(i).setRatedByMe(false);
+						}
+					}
+					else
+					{
+						throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Invalid access token").build());
+					}
+				}
+			}
+			temp.add(model.getAllMovies().get(i));
+			
 		}
-		return temp;
+		return (ArrayList<Movie>) model.getAllMovies();
 	}
 	
 	@GET
@@ -75,9 +99,34 @@ public class MoviesJersey {
 	
 	@GET
 	@Path("newest")
-	public List<Movie> getNewestMovies()
+	public List<Movie> getNewestMovies(@HeaderParam("access_token") String accessToken)
 	{
 		Model model = (Model) context.getAttribute("model");
+		ArrayList<Movie> temp = new ArrayList<Movie>();
+		System.out.println(accessToken);
+		for(int i = 0; i < model.getAllMovies().size(); i++) {
+			model.getAllMovies().get(i).setAvgRating(model.getAvgRatingMovie(model.getAllMovies().get(i)));
+			if(!accessToken.equals("null"))
+			{
+				User user = model.checkAccessToken(accessToken);
+				if(user != null)
+				{
+					if(model.ratedByUser(model.getAllMovies().get(i), user))
+					{
+						model.getAllMovies().get(i).setRatedByMe(true);
+					}
+					else
+					{
+						model.getAllMovies().get(i).setRatedByMe(false);
+					}
+				}
+				else
+				{
+					throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Invalid access token").build());
+				}
+			}
+			temp.add(model.getAllMovies().get(i));
+		}
 		return model.newestMovies();
 
 	}

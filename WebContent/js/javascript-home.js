@@ -2,12 +2,21 @@ var newestMovies = new Object();
 var movie = new Object();
 
 var loadNewMovies = function(){
-	
+	accessToken = localStorage.getItem('accessToken');
 	$.ajax({
 		url: "resources/movies/newest",
-		dataType: "json",		
-	}).fail(function(jqXHR, textStatus){
-		alert("help");
+		dataType: "json",
+		beforeSend: function (request)
+        {
+            request.setRequestHeader("access_token", accessToken);
+        },
+	}).fail(function(jgXHR, textStatus){
+		if(jgXHR.responseText == "Invalid access token"){
+			logout();
+			location.reload();
+
+		}
+	
 	}).done(function(data){
 		newestMovies = data;
 		setSliderMovie(0);
@@ -29,5 +38,6 @@ var setSliderMovie = function(index){
 
 $(document).ready(function(){
 	loadNewMovies();
+	
 });
 

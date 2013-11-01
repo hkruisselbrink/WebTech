@@ -5,6 +5,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -35,9 +36,8 @@ public class MovieJersey {
 		}
 		else
 		{
-			System.out.println(temp.getRatedByMe());
 			temp.setAvgRating(model.getAvgRatingMovie(temp));
-			if(!accessToken.equals(""))
+			if(accessToken != null)
 			{
 				User user = model.checkAccessToken(accessToken);
 				if(user != null)
@@ -58,6 +58,40 @@ public class MovieJersey {
 			}
 			System.out.println(temp.getRatedByMe());
 			return temp;
+		}
+	}
+	
+	@PUT
+	@Path("{id}/rate")
+	public void updateMovie(@PathParam("id") String id, @HeaderParam("rating") double rating, @HeaderParam("access_token") String accessToken)
+	{
+		if(rating % 0.5 != 0) {
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Invalid Rating").build());
+		}
+		Model model = (Model) context.getAttribute("model");
+		Movie movie = model.getMovie(id);
+		
+		if(movie == null)
+		{
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Movie not found").build());
+		}
+		
+		User user = model.checkAccessToken(accessToken);
+		if(user == null)
+		{
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("User not found").build());
+
+		}
+		
+		Rating r = model.getRating(movie, user);
+		
+		if(r == null)
+		{
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Movie not yet rated").build());
+		}
+		else
+		{
+			model.changeRating(r, rating, movie);
 		}
 	}
 	
@@ -87,12 +121,11 @@ public class MovieJersey {
 		
 		if(r == null)
 		{
-			System.out.println("fredje");
 			model.addRating(movie, user, rating);
 		}
 		else
 		{
-			model.changeRating(r, rating, movie);
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Movie allready rated").build());
 		}		
 		
 	}
@@ -101,6 +134,7 @@ public class MovieJersey {
 	@Path("{id}/rate")
 	public void deleteRating(@PathParam("id") String id, @HeaderParam("access_token") String accessToken) 
 	{
+		System.out.println("kameel");
 		Model model = (Model) context.getAttribute("model");
 		Movie movie = model.getMovie(id);
 		

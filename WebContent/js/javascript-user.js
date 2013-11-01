@@ -2,7 +2,6 @@
 
 
 var setUser = function(id, accessToken){
-	alert(accessToken);
 	$.ajax({
 		url: "resources/user/" + id,
 		dataType: "json",
