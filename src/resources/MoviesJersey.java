@@ -45,7 +45,7 @@ public class MoviesJersey {
 		User user = model.checkAccessToken(accessToken);
 		if(user == null)
 		{
-			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("User not found").build());
+			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Invalid access token").build());
 
 		}
 		

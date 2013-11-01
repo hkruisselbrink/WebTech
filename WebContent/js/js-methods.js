@@ -113,3 +113,17 @@ var getParams = function(){
 
     return params;
 };
+
+var handleError = function(jgXHR){
+	if(jgXHR.responseText === "Invalid access token"){
+		alert("Session expired (oftewel accesstoken geldt niet meer ;) )");
+		logout();
+		window.location.href = "http://localhost:8080/Webtech3/";
+	}
+	else if(jgXHR.status == 404){
+		alert("Gevraagde resource is niet gevonden.");
+	}
+	else if(jgXHR.responseText === "user already exists"){
+		alert("User already exists");
+	}
+};

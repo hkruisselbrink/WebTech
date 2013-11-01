@@ -1,3 +1,5 @@
+var movies = new Object();
+
 var login = function(username, password){
 	
 	var jsonObject = new Object();
@@ -19,6 +21,39 @@ var login = function(username, password){
 	});
 };
 
+var getMovies = function(accessToken){
+	$.ajax({
+		url: "../resources/movies",
+		dataType:"json"
+	}).fail(function(jgXHR, textStatus){
+		alert(jgXHR.responseText);
+	}).done(function(data){
+		movies = data;
+		
+		$.each(data, function(key, movieObj){
+			$('#movieList').append('<li><a href="#">' + movieObj.title + '</a></li>');
+		});
+		
+		$('#movieList').listview('refresh');
+	});
+};
+
+var rateMovie = function(index){
+	var accessToken = localStorage.getItem("accessToken");
+	if(accessToken === null){
+		alert("Session expired");
+		$.mobile.changePage('#loginpage');
+	}
+
+	var isRated = movies[index].ratedByMe;
+	
+	if(isRated){
+		$.ajax({
+			url: "../resources/user",
+		})
+	}
+};
+
 
 
 $(document).on("pageinit", "#loginpage", function(){
@@ -33,6 +68,9 @@ $(document).on("pageinit", "#moviespage", function(){
 		alert('Not logged in');
 		$.mobile.changePage('#loginpage');
 	}
+	
+	getMovies();
+	
 });
 
 $(document).on('click', '#submit-button', function(){
@@ -49,4 +87,9 @@ $(document).on('click', '#submit-button', function(){
 $(document).on('click', '#logout-button', function(){
 	localStorage.removeItem('accessToken');
 	$.mobile.changePage("#loginpage");
+});
+
+$(document).on('click', '#rating', function(){
+	alert("hahe");
+	alert($(this).text());
 });

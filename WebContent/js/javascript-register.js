@@ -35,6 +35,7 @@ var register = function(firstname, insertion, lastname, nickname, password){
 		dataType:"json",
 		async: false
 	}).fail(function(jgXHR, textStatus){
+		handleError(jgXHR);
 		
 	}).done(function(data){
 		window.location.href = "http://localhost:8080/Webtech3/";

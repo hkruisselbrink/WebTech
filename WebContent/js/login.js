@@ -4,8 +4,10 @@ var user = new Object();
 var logout = function(){
 	if(localStorage.getItem('accessToken') != null){
 		localStorage.removeItem('accessToken');
+		localStorage.removeItem('username');
 		$('#login-form').show();
 		$('#logged-in-div').hide();
+		$('#my-ratings').hide();
 		
 	}
 };
@@ -26,8 +28,8 @@ var getUser = function(accessToken)
 	}).done(function(data){
 		user = data;
 		$('#logged-in-as').text("Logged in as: " + user.nickname);
-		$('#logged-in-div').show();
-		$('#login-form').hide();
+		localStorage.setItem('username', user.nickname);
+		alert("gelukt");
 		
 	});
 };
@@ -62,8 +64,18 @@ $(document).ready(function(){
 		$('#logged-in-div').hide();
 		$('#my-ratings').hide();
 	}else{
-		getUser(accessToken);
-		$('#my-ratings').show();
+		$('#login-form').hide();
+		$('#logged-in-div').show();
+		var username = localStorage.getItem('username');
+		if(username === null){
+			getUser(accessToken);
+		}
+		else{
+			$('#logged-in-as').text("Logged in as: " + username);
+		}
+		
+		
+		
 	};	
 	
 });
@@ -83,7 +95,6 @@ $('#submit-login').click(function(){
 
 $('#logout-button').click(function(){
 	logout();
-	$('#my-ratings').hide();
 	window.location.href = "http://localhost:8080/Webtech3/";
 });
 

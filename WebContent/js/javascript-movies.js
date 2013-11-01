@@ -65,7 +65,7 @@ var getMyRatedMovies = function(accessToken){
             request.setRequestHeader("access_token", accessToken);
         },
 	}).fail(function(jgXHR, textStatus){
-		alert(jgXHR.status);
+		handleError(jgXHR);
 	}).done(function(data){
 		$.each(data, function(key, ratingObj){
 			var movieObj = new Object();
