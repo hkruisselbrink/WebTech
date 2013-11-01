@@ -25,6 +25,15 @@ public class MovieJersey {
 	
 	@Context ServletContext context;
 	
+	/**
+	 * Methode voor het ophalen van een movie. Er wordt gecontroleerd of er een movie is met de opgegeven id. 
+	 * Dan wordt bekeken of de ingelogde gebruiker deze movie al gerate heeft. Als dit zo is, dan wordt de boolean ratedByMe in het movie object op true gezet.
+	 * Daarna wordt de film teruggegeven.
+	 * Produceert een JSON array aan de hand van de return result.
+	 * @param id de id van de movie die opgehaald wordt
+	 * @param accessToken de access token van gebruiker
+	 * @return de movie die bij het opgegeven id hoort
+	 */
 	@GET
 	@Path("{id}")
 	public Movie getMovie(@PathParam("id") String id, @HeaderParam("access_token") String accessToken) {
@@ -61,6 +70,15 @@ public class MovieJersey {
 		}
 	}
 	
+	/**
+	 * Methode voor het aanpassen van een reeds opgeslagen rating. 
+	 * Er wordt gecontroleerd of de rating juist is meegegeven. Dan wordt bekeken of er een movie is met de opgegeven id.
+	 * Daarna wordt gecontroleerd of de opgegeven access token bestaat en de gebruiker dus ingelogd is. 
+	 * In het model wordt dan bekeken of de gebruiker deze film een rating heeft gegeven. Zo ja, dan wordt deze aangepast.
+	 * @param id de id van de movie wiens rating aangepast wordt
+	 * @param rating de nieuwe rating die ingesteld wordt
+	 * @param accessToken de access token van de gebruiker
+	 */
 	@PUT
 	@Path("{id}/rate")
 	public void updateMovie(@PathParam("id") String id, @HeaderParam("rating") double rating, @HeaderParam("access_token") String accessToken)
@@ -95,6 +113,15 @@ public class MovieJersey {
 		}
 	}
 	
+	/**
+	 * Methode voor het plaatsen van een rating.
+	 * Er wordt gecontroleerd of de rating juist is meegegeven. Dan wordt bekeken of er een movie is met de opgegeven id.
+	 * Daarna wordt gecontroleerd of de opgegeven access token bestaat en de gebruiker dus ingelogd is. 
+	 * In het model wordt dan bekeken of de gebruiker deze film een rating heeft gegeven. Zo nee, dan wordt de rating geplaatst.
+	 * @param id de id van de movie die een rating krijgt
+	 * @param rating de rating die ingesteld wordt
+	 * @param accessToken de access token van de gebruiker
+	 */
 	@POST
 	@Path("{id}/rate")
 	public void rateMovie(@PathParam("id") String id, @HeaderParam("rating") double rating, @HeaderParam("access_token") String accessToken)
@@ -130,6 +157,14 @@ public class MovieJersey {
 		
 	}
 	
+	/**
+	 * Methode voor het verwijderen van een rating.
+	 * Er wordt bekeken of er een movie is met de opgegeven id.
+	 * Daarna wordt gecontroleerd of de opgegeven access token bestaat en de gebruiker dus ingelogd is. 
+	 * In het model wordt dan bekeken of de gebruiker deze film een rating heeft gegeven. Zo ja, dan wordt deze verwijdert.
+	 * @param id de id van de movie wiens rating verwijdert wordt
+	 * @param accessToken de access token van de gebruiker
+	 */	
 	@DELETE
 	@Path("{id}/rate")
 	public void deleteRating(@PathParam("id") String id, @HeaderParam("access_token") String accessToken) 

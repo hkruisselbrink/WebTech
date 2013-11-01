@@ -7,9 +7,12 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 @ApplicationPath("resources")
 public class MyRest extends ResourceConfig {
-	
- public MyRest() {
+
+/**
+ * Registeert de resources
+ */
+public MyRest() {
   packages("resources");
- }
+}
  
 }

@@ -23,10 +23,18 @@ public class UserJersey {
 	
 	@Context ServletContext context;
 	
+	/**
+	 * Methode voor het ophalen van een user aan de hand van de meegegeven id. 
+	 * Eerst wordt gecontroleerd of de access token bestaat, dan wordt bekeken of er een user bestaat met de opgegeven id.
+	 * Zo ja, dan wordt deze user teruggegeven.
+	 * Produceert een JSON array aan de hand van de return result.
+	 * @param id id van de te zoeken user
+	 * @param accessToken access token van de gebruiker
+	 * @return user die bij opgegeven id hoort
+	 */
 	@Path("{id}")
 	@GET
 	@Produces({"application/json", "application/xml"})
-
 	public User getUser(@PathParam("id") String id, @HeaderParam("access_token") String accessToken)
 	{
 		Model model = (Model) context.getAttribute("model");
@@ -48,6 +56,12 @@ public class UserJersey {
 		}
 	}
 	
+	/**
+	 * Methode voor het ophalen van de user die is ingelogd. Er wordt eerst bekeken of de access token bestaat. Zo ja, dan wordt de huidige gebruiker teruggegeven.
+	 * Produceert een JSON array aan de hand van de return result.
+	 * @param accessToken de access token van de gebruiker
+	 * @return user object van huidige gebruiker
+	 */
 	@GET
 	@Path("me")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -63,6 +77,10 @@ public class UserJersey {
 		return me;
 	}
 	
+	/**
+	 * Methode voor het toevoegen van een user aan het model. De opgegeven user moet in een JSONarray beschreven worden.
+	 * @param user het toe te voegen user object
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createUser(User user)
