@@ -65,7 +65,6 @@ public class MovieJersey {
 					temp.setRatedByMe(false);
 				}
 			}
-			System.out.println(temp.getRatedByMe());
 			return temp;
 		}
 	}
@@ -169,7 +168,6 @@ public class MovieJersey {
 	@Path("{id}/rate")
 	public void deleteRating(@PathParam("id") String id, @HeaderParam("access_token") String accessToken) 
 	{
-		System.out.println("kameel");
 		Model model = (Model) context.getAttribute("model");
 		Movie movie = model.getMovie(id);
 		

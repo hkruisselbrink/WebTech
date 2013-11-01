@@ -88,7 +88,6 @@ public class Movie implements Comparable<Movie>{
 	
 	public void setAvgRating(double avgRating) 
 	{
-		System.out.println("setAvgRating" + avgRating);
 		this.avgRating = avgRating;
 	}
 	

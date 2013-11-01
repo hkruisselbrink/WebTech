@@ -38,7 +38,6 @@ public class UsersJersey {
 			throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).entity("Invalid access token").build());
 
 		}
-		System.out.println((ArrayList<User>) model.getAllUsers());
 		return (ArrayList<User>) model.getAllUsers();
 	}	
 

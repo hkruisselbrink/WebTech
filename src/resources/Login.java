@@ -32,7 +32,6 @@ public class Login {
 	@POST
 	public String loginUser(User user) {
 		Model model = (Model) context.getAttribute("model");
-		System.out.println("Pjotr is cool");
 		List<User> userList = model.getAllUsers();
 		User temp = null;
 		if(user.getNickname() == null || user.getPassword() == null)

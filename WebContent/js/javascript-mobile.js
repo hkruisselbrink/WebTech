@@ -82,11 +82,8 @@ var rateMovie = function(rating){
 
 	var isRated = currentMovie.ratedByMe;
 	var id = currentMovie.ttNumber;
-	alert(isRated);
-	alert("kutjes");
 	
 	if(isRated) {
-		alert("put");
 		$.ajax({
 			type: "PUT",
 			url: "../resources/movie/" + id + "/rate",
@@ -105,7 +102,6 @@ var rateMovie = function(rating){
 	}
 	else
 	{
-		alert("post");
 		$.ajax({
 			type: "POST",
 			url: "../resources/movie/" + id + "/rate",
@@ -150,8 +146,6 @@ $(document).on("pageinit", "#moviepage", function(){
 		$.mobile.changePage('#loginpage');
 	}
 	currentMovie = movies[currentMovieIndex];
-	alert(currentMovie.title);
-	alert(currentMovie.ratedByMe);
 	
 	
 });
@@ -174,6 +168,5 @@ $(document).on('click', '#logout-button', function(){
 
 $(document).on('change', '#select-rating', function () {
 	var rating =$("#select-rating option:selected").text();
-	alert(rating);
 	rateMovie(rating);
 });

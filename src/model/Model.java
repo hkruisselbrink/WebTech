@@ -130,7 +130,6 @@ public class Model {
 		Rating ratingObj = new Rating(user, movie, rating);
 		ratings.add(ratingObj);
 		movie.setAvgRating(getAvgRatingMovie(movie));
-		System.out.println(ratings.toString());
 	}
 	
 	/**
@@ -144,7 +143,6 @@ public class Model {
 	{
 		rating.setRating(ratingNumber);
 		movie.setAvgRating(getAvgRatingMovie(movie));
-		System.out.println(ratings.toString());
 	}
 	
 	/**

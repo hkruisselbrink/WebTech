@@ -33,7 +33,6 @@ public class MoviesJersey {
 	public ArrayList<Movie> getMovies(@HeaderParam("access_token") String accessToken) {
 		Model model = (Model) context.getAttribute("model");
 		ArrayList<Movie> temp = new ArrayList<Movie>();
-		System.out.println(accessToken);
 		for(int i = 0; i < model.getAllMovies().size(); i++) {
 			model.getAllMovies().get(i).setAvgRating(model.getAvgRatingMovie(model.getAllMovies().get(i)));
 			if(accessToken != null)
