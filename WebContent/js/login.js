@@ -29,7 +29,6 @@ var getUser = function(accessToken)
 		user = data;
 		$('#logged-in-as').text("Logged in as: " + user.nickname);
 		localStorage.setItem('username', user.nickname);
-		alert("gelukt");
 		
 	});
 };

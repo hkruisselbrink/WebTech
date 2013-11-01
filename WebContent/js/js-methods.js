@@ -136,7 +136,7 @@ var getParams = function(){
 
 var handleError = function(jgXHR){
 	if(jgXHR.responseText === "Invalid access token"){
-		alert("Session expired (oftewel accesstoken geldt niet meer ;) )");
+		alert("Session expired");
 		logout();
 		window.location.href = "http://localhost:8080/Webtech3/";
 	}

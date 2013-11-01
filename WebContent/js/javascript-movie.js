@@ -5,7 +5,6 @@ var setMovie = function(id){
 	if(accessToken === null){
 		accessToken = "";
 	}
-	alert(accessToken);
 	$.ajax({
 		url: "resources/movie/" + id,
 		dataType: "json",
@@ -14,7 +13,7 @@ var setMovie = function(id){
             request.setRequestHeader("access_token", accessToken);
         },
 	}).fail(function(jgXHR, textStatus){
-		alert("faaal");
+		alert(jgXHR.status);
 	}).done(function(data){
 		movie = data;
 		$('#movie-title-slider').text(data.title);
@@ -24,8 +23,6 @@ var setMovie = function(id){
 		$('#movie-date-slider').text("Date: " + data.date);
 		setMoviePoster(data.ttNumber, "jumbotron-poster");
 		setStars(data.avgRating, "star");
-		alert(movie.ratedByMe);
-
 	});
 };
 
