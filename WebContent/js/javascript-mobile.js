@@ -1,4 +1,6 @@
 var movies = new Object();
+var currentMovieIndex = -1;
+var currentMovie = new Object();
 
 var login = function(username, password){
 	
@@ -35,7 +37,7 @@ var getMovies = function(accessToken){
 		movies = data;
 		
 		$.each(data, function(key, movieObj){
-			$('#movieList').append('<li><a href="#moviepage?id=' + key + '">' + movieObj.title + '</a></li>');
+			$('#movieList').append('<li><a href="#" onclick="setCurrentMovie('+key+');">' + movieObj.title + '</a></li>');
 			
 		});
 		
@@ -68,21 +70,20 @@ var deleteRating = function(index){
 
 var setCurrentMovie = function(index){
 	currentMovieIndex = index;
+	$.mobile.changePage('#moviepage');
 };
 
-var rateMovie = function(index, rating){
-	alert("1");
+var rateMovie = function(rating){
 	var accessToken = localStorage.getItem("accessToken");
 	if(accessToken === null){
 		alert("Session expired");
 		$.mobile.changePage('#loginpage');
 	}
-	alert("2");
 
-	var isRated = movies[index].ratedByMe;
-	var id = movies[index].ttNumber;
-	
+	var isRated = currentMovie.ratedByMe;
+	var id = currentMovie.ttNumber;
 	alert(isRated);
+	alert("kutjes");
 	
 	if(isRated) {
 		alert("put");
@@ -118,37 +119,20 @@ var rateMovie = function(index, rating){
 		}).fail(function(jgXHR, textStatus){
 			alert("Kan de film niet raten..");
 		}).done(function(data){
-			$.mobile.refresh();
+			$.mobile.changePage('#moviespage');
 		});
 	}
 };
 
-var getParams = function(){
-    var params = {},
-        pairs = document.URL.split('?')
-               .pop()
-               .split('&');
 
-    for (var i = 0, p; i < pairs.length; i++) {
-           p = pairs[i].split('=');
-           alert(p[0]);
-           params[ p[0] ] =  p[1];
-    }     
-
-    alert(params['id']);
-    return params;
-};
-
-
-
-$(document).on("pageinit", "#loginpage", function(){
+$(document).on("pageshow", "#loginpage", function(){
 	if(localStorage.getItem('accessToken') != null){
 		$.mobile.changePage('#moviespage');
 	}
 	
 });
 
-$(document).on("pageinit", "#moviespage", function(){
+$(document).on("pageshow", "#moviespage", function(){
 	var accessToken = localStorage.getItem('accessToken');
 	if(accessToken == null){
 		alert('Not logged in');
@@ -159,19 +143,15 @@ $(document).on("pageinit", "#moviespage", function(){
 	
 });
 
-$(document).on("pageinit", "#moviepage", function(){
-	alert("hier");
+$(document).on("pageshow", "#moviepage", function(){
 	var accessToken = localStorage.getItem('accessToken');
 	if(accessToken == null){
 		alert('Not logged in');
 		$.mobile.changePage('#loginpage');
 	}
-	
-	var chosenMovieIndex = getParams()['id'];
-	
-	alert(chosenMovieIndex);
-	
-	var movie = movies[chosenMovieIndex];
+	currentMovie = movies[currentMovieIndex];
+	alert(currentMovie.title);
+	alert(currentMovie.ratedByMe);
 	
 	
 });
@@ -192,11 +172,8 @@ $(document).on('click', '#logout-button', function(){
 	$.mobile.changePage("#loginpage");
 });
 
-$(document).on('click', '#rating', function(){
-	alert("hahe");
-	alert($(this).text());
-});
-
 $(document).on('change', '#select-rating', function () {
-	alert("sccie");
+	var rating =$("#select-rating option:selected").text();
+	alert(rating);
+	rateMovie(rating);
 });
