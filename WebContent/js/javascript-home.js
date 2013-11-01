@@ -2,10 +2,14 @@ var newestMovies = new Object();
 var movie = new Object();
 
 var loadNewMovies = function(){
-	
+	accessToken = localStorage.getItem('accessToken');
 	$.ajax({
 		url: "resources/movies/newest",
-		dataType: "json",		
+		dataType: "json",
+		beforeSend: function (request)
+        {
+            request.setRequestHeader("access_token", accessToken);
+        },
 	}).fail(function(jqXHR, textStatus){
 		alert("help");
 	}).done(function(data){

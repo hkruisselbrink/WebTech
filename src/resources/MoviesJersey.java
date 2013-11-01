@@ -75,9 +75,33 @@ public class MoviesJersey {
 	
 	@GET
 	@Path("newest")
-	public List<Movie> getNewestMovies()
+	public List<Movie> getNewestMovies(@HeaderParam("access_token") String accessToken)
 	{
 		Model model = (Model) context.getAttribute("model");
+		ArrayList<Movie> temp = new ArrayList<Movie>();
+		for(int i = 0; i < model.getAllMovies().size(); i++) {
+			model.getAllMovies().get(i).setAvgRating(model.getAvgRatingMovie(model.getAllMovies().get(i)));
+			if(!(accessToken == null))
+			{
+				User user = model.checkAccessToken(accessToken);
+				if(user != null)
+				{
+					if(model.ratedByUser(model.getAllMovies().get(i), user))
+					{
+						model.getAllMovies().get(i).setRatedByMe(true);
+					}
+					else
+					{
+						model.getAllMovies().get(i).setRatedByMe(false);
+					}
+				}
+				else
+				{
+					model.getAllMovies().get(i).setRatedByMe(false);
+				}
+			}
+			temp.add(model.getAllMovies().get(i));
+		}
 		return model.newestMovies();
 
 	}

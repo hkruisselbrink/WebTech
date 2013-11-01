@@ -80,22 +80,43 @@ var rateMovie = function(rating){
 		alert("Not logged in");
 		return;
 	}
-	
-	$.ajax({
-		type: "POST",
-		url: "resources/movie/" + movie.ttNumber + "/rate",
-		beforeSend: function (request)
-        {
-			//rating en access_token worden meegegeven in de headers
-            request.setRequestHeader("access_token", accessToken);
-            request.setRequestHeader("rating", rating);
-        },
-		dataType: "json",
-	}).fail(function(jgXHR, textStatus){
-		alert("Kan de film niet raten..");
-	}).done(function(data){
-		alert("Movie rated");
-	});
+	if(movie.ratedByMe) {
+		alert("put");
+		$.ajax({
+			type: "PUT",
+			url: "resources/movie/" + movie.ttNumber + "/rate",
+			beforeSend: function (request)
+	        {
+				//rating en access_token worden meegegeven in de headers
+	            request.setRequestHeader("access_token", accessToken);
+	            request.setRequestHeader("rating", rating);
+	        },
+			dataType: "json",
+		}).fail(function(jgXHR, textStatus){
+			alert("Kan de film niet raten..");
+		}).done(function(data){
+			alert("Movie rated");
+		});
+	}
+	else
+	{
+		alert("post");
+		$.ajax({
+			type: "POST",
+			url: "resources/movie/" + movie.ttNumber + "/rate",
+			beforeSend: function (request)
+	        {
+				//rating en access_token worden meegegeven in de headers
+	            request.setRequestHeader("access_token", accessToken);
+	            request.setRequestHeader("rating", rating);
+	        },
+			dataType: "json",
+		}).fail(function(jgXHR, textStatus){
+			alert("Kan de film niet raten..");
+		}).done(function(data){
+			alert("Movie rated");
+		});
+	}
 };
 
 

@@ -80,13 +80,31 @@ var getMyRatedMovies = function(accessToken){
 						.append('<img id="star' + key + '4" src="img/unratedStar.png" alt="star1"></img>')
 						.append('<img id="star' + key + '5" src="img/unratedStar.png" alt="star1"></img>')
 			.append('</div>')
+			.append('<button class="btn btn-danger" onClick="deleteRating(\'' + movieObj.ttNumber + '\')">Delete</button>')
 			.append('<div class="clearfix></div></div>')
 			.appendTo('#movies');
 			
 			setMoviePoster(movieObj.ttNumber, "img" + key);
-			setStars(movieObj.avgRating, "star" + key);
+			setStars(ratingObj.rating, "star" + key);
 			
 		});
+	});
+};
+
+var deleteRating = function(ttNumber){
+	$.ajax({
+		url: "resources/movie/" + ttNumber + "/rate",
+		dataType: "json",
+		type: "DELETE",
+		beforeSend: function (request)
+        {
+			request.setRequestHeader("id", ttNumber);
+            request.setRequestHeader("access_token", accessToken);
+        },
+	}).fail(function(jgXHR, textStatus){
+		alert(jgXHR.status);
+	}).done(function(data){
+		location.reload();
 	});
 };
 

@@ -33,5 +33,4 @@ $(document).ready(function(){
 	var params = getParams();
 	var id = params['id'];
 	setMovie(id);
-	
 });
